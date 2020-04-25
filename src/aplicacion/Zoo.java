@@ -19,6 +19,7 @@ public class Zoo {
         
         System.out.println("HIHIHIHI");
         
+        System.out.println("Lois was here");
         
         System.out.println("Soy Nosu");
     }
