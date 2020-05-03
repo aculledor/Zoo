@@ -41,4 +41,11 @@ public class FachadaAplicacion {
         fgui.muestraExcepcion(e);
     }
 
+    public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento){
+        return ce.obtenerEspecimenes(id,especie,habitat,enTratamiento);
+    }
+    
+    public void visualizarDetallesEspecimen(VPrincipal padre){
+        fgui.visualizarDetallesEspecimen(padre);
+    }
 }

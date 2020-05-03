@@ -26,4 +26,7 @@ public class GestionEspecimenes {
         return fbd.consultarEspecimenes();
     }
     
+    public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento){
+        return fbd.obtenerEspecimenes(id,especie,habitat,enTratamiento);
+    }
 }

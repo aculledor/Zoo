@@ -50,23 +50,104 @@ public class VEspecimenes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        etiquetaBuscaId = new javax.swing.JLabel();
+        etiquetaBuscaEspecie = new javax.swing.JLabel();
+        etiquetaBuscaHabitat = new javax.swing.JLabel();
+        botonBuscar = new javax.swing.JButton();
+        fieldBuscarHabitat = new javax.swing.JTextField();
+        fieldBuscarEspecie = new javax.swing.JTextField();
+        fieldBuscarId = new javax.swing.JTextField();
+        buscarEnTratamiento = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEspec = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        botonNuevo = new javax.swing.JButton();
+        botonBorrar = new javax.swing.JButton();
+        botonEditar = new javax.swing.JButton();
+        botonDetalles = new javax.swing.JButton();
+
+        jButton5.setText("jButton5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        etiquetaBuscaId.setText("Id:");
+
+        etiquetaBuscaEspecie.setText("Especie:");
+
+        etiquetaBuscaHabitat.setText("Hábitat:");
+
+        botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
+            }
+        });
+
+        fieldBuscarHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldBuscarHabitatActionPerformed(evt);
+            }
+        });
+
+        fieldBuscarEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldBuscarEspecieActionPerformed(evt);
+            }
+        });
+
+        fieldBuscarId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldBuscarIdActionPerformed(evt);
+            }
+        });
+
+        buscarEnTratamiento.setText("En tratamiento");
+        buscarEnTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarEnTratamientoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(etiquetaBuscaId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldBuscarId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(etiquetaBuscaEspecie)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldBuscarEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(etiquetaBuscaHabitat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldBuscarHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buscarEnTratamiento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaBuscaId)
+                    .addComponent(etiquetaBuscaEspecie)
+                    .addComponent(etiquetaBuscaHabitat)
+                    .addComponent(botonBuscar)
+                    .addComponent(fieldBuscarHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldBuscarEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldBuscarId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarEnTratamiento))
+                .addGap(19, 19, 19))
         );
 
         tablaEspec.setModel(new ModeloTablaEspecimenes());
@@ -76,7 +157,7 @@ public class VEspecimenes extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,15 +166,51 @@ public class VEspecimenes extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        botonNuevo.setText("Nuevo");
+
+        botonBorrar.setText("Borrar");
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarActionPerformed(evt);
+            }
+        });
+
+        botonEditar.setText("Editar");
+
+        botonDetalles.setText("Detalles");
+        botonDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonDetallesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(botonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106)
+                .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109)
+                .addComponent(botonDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 95, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonDetalles)
+                        .addComponent(botonEditar))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonNuevo)
+                        .addComponent(botonBorrar)))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,12 +234,63 @@ public class VEspecimenes extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buscarEnTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEnTratamientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarEnTratamientoActionPerformed
+
+    private void fieldBuscarIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscarIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBuscarIdActionPerformed
+
+    private void fieldBuscarHabitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscarHabitatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBuscarHabitatActionPerformed
+
+    private void fieldBuscarEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscarEspecieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBuscarEspecieActionPerformed
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        buscarEspecimenes();
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonBorrarActionPerformed
+
+    private void botonDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDetallesActionPerformed
+        fa.visualizarDetallesEspecimen(padre);
+    }//GEN-LAST:event_botonDetallesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonBorrar;
+    private javax.swing.JButton botonBuscar;
+    private javax.swing.JButton botonDetalles;
+    private javax.swing.JButton botonEditar;
+    private javax.swing.JButton botonNuevo;
+    private javax.swing.JCheckBox buscarEnTratamiento;
+    private javax.swing.JLabel etiquetaBuscaEspecie;
+    private javax.swing.JLabel etiquetaBuscaHabitat;
+    private javax.swing.JLabel etiquetaBuscaId;
+    private javax.swing.JTextField fieldBuscarEspecie;
+    private javax.swing.JTextField fieldBuscarHabitat;
+    private javax.swing.JTextField fieldBuscarId;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaEspec;
     // End of variables declaration//GEN-END:variables
+
+    public void buscarEspecimenes(){
+        ModeloTablaEspecimenes m;
+
+        m=(ModeloTablaEspecimenes) tablaEspec.getModel();
+        m.setFilas(fa.obtenerEspecimenes((fieldBuscarId.getText().isEmpty())?null:Integer.parseInt(fieldBuscarId.getText()), fieldBuscarEspecie.getText(), fieldBuscarHabitat.getText(), buscarEnTratamiento.isSelected()));
+        if (m.getRowCount() > 0) {
+            tablaEspec.setRowSelectionInterval(0, 0);
+        }
+    }
 }

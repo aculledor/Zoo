@@ -55,4 +55,53 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
+    public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento) {
+        java.util.List<Especimen> resultado = new java.util.ArrayList<>();
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select numero, especie, habitates, veterinarioid "
+                + "from especimenes as e "
+                +"where especie like ?"
+                +"  and habitates like ?";
+        
+            if (id != null)
+                consulta = consulta + " and numero = "+id.toString();
+            
+            
+            if (enTratamiento)
+            consulta = consulta + "  and exists (select * "+
+                                         "              from tratar as tr "+
+                                         "             	where e.especie =tr.especimenea "+
+                                         "             	and e.numero=tr.especimennum "+
+                                         "              and tr.fechafin is null)";
+            
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+especie+"%");
+            stmCatalogo.setString(2, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
+                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
 }

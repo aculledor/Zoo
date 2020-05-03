@@ -16,6 +16,7 @@ public class FachadaGui {
     aplicacion.FachadaAplicacion fa;
     VPrincipal vp;
     VEspecimenes vesp;
+    VEspecimen vdetesp;
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
@@ -35,4 +36,8 @@ public class FachadaGui {
         va.setVisible(true);
     }
 
+    public void visualizarDetallesEspecimen(VPrincipal padre){
+        this.vdetesp = new VEspecimen(padre, fa);
+        vdetesp.setVisible(true);
+    }
 }

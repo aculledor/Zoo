@@ -62,4 +62,7 @@ public class FachadaBaseDatos {
        return daoEspec.consultarEspecimenes();
     }
 
+    public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento){
+        return daoEspec.obtenerEspecimenes(id,especie,habitat,enTratamiento);
+    }
 }
