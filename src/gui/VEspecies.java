@@ -14,7 +14,7 @@ import aplicacion.FachadaAplicacion;
 public class VEspecies extends javax.swing.JDialog {
     private VPrincipal padre;
     private FachadaAplicacion fa;
-    //private ModeloTablaTratamientos mTablaTrat;
+    private ModeloTablaEspecimenes mTablaEspecies;
     
     /**
      * Creates new form VEspecimenes
@@ -23,7 +23,18 @@ public class VEspecies extends javax.swing.JDialog {
         super(parent);
         this.fa = fa;
         initComponents();
-        this.padre = (VPrincipal) parent; 
+        this.padre = (VPrincipal) parent;
+        
+        mTablaEspecies = new ModeloTablaEspecimenes();
+        jTable1.setModel(mTablaEspecies);
+        
+        mTablaEspecies.setFilas(fa.consultarEspecimenes()); /// NOSU: CAMBIAR DE ESPECIMENES A ESPECIES
+        
+        if(mTablaEspecies.getRowCount()> 0){
+            jTable1.setRowSelectionInterval(0, 0);
+        }
+        
+        //actualizarEspecimenes();
     }
         
         /*
