@@ -33,6 +33,10 @@ public class FachadaAplicacion {
         fgui.visualizarEspecimenes(padre);
     }
     
+    public void visualizarEspecies(VPrincipal padre){
+        fgui.visualizarEspecies(padre);
+    }
+    
     public java.util.List<Especimen> consultarEspecimenes(){
         return ce.consultarEspecimenes();
     }

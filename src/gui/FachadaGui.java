@@ -17,6 +17,8 @@ public class FachadaGui {
     VPrincipal vp;
     VEspecimenes vesp;
     VEspecimen vdetesp;
+    VEspecies vea;
+            
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
         this.fa = fa;
@@ -27,6 +29,11 @@ public class FachadaGui {
     public void visualizarEspecimenes(VPrincipal padre){
         this.vesp = new VEspecimenes(padre, fa);
         vesp.setVisible(true);
+    }
+    
+    public void visualizarEspecies(VPrincipal padre){
+        this.vea = new VEspecies(padre, fa);
+        vea.setVisible(true);
     }
 
     public void muestraExcepcion(String txtExcepcion) {

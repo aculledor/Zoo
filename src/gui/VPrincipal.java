@@ -64,6 +64,11 @@ public class VPrincipal extends javax.swing.JFrame {
         especiesB.setText("ESPECIES");
         especiesB.setMaximumSize(new java.awt.Dimension(500, 500));
         especiesB.setPreferredSize(new java.awt.Dimension(400, 250));
+        especiesB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                especiesBActionPerformed(evt);
+            }
+        });
 
         habitatsB.setFont(new java.awt.Font("Times New Roman", 0, 48)); // NOI18N
         habitatsB.setText("HÁBITATS");
@@ -117,6 +122,11 @@ public class VPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         fa.visualizarEspecimenes(this);
     }//GEN-LAST:event_especimenesBActionPerformed
+
+    private void especiesBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_especiesBActionPerformed
+        // TODO add your handling code here:
+        fa.visualizarEspecies(this);
+    }//GEN-LAST:event_especiesBActionPerformed
 
 
 

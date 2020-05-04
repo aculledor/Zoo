@@ -131,6 +131,9 @@
               <Dimension value="[400, 250]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="especiesBActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="habitatsB">
           <Properties>
