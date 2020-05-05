@@ -37,4 +37,8 @@ public class GestionEspecimenes {
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         fbd.nuevoEspecimen(id,especie,habitat,veterinario);
     }
+    
+    public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
+        return fbd.consultarCompHabitat(espe);
+    }
 }

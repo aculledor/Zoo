@@ -45,8 +45,8 @@ public class FachadaAplicacion {
         return ce.obtenerEspecimenes(id,especie,habitat,enTratamiento);
     }
     
-    public void visualizarDetallesEspecimen(VPrincipal padre){
-        fgui.visualizarDetallesEspecimen(padre);
+    public void visualizarDetallesEspecimen(VPrincipal padre, Especimen espe){
+        fgui.visualizarDetallesEspecimen(padre,espe);
     }
     
     public void borrarEspecimen(int id, String especie){
@@ -55,5 +55,9 @@ public class FachadaAplicacion {
     
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         ce.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
+    
+    public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
+        return ce.consultarCompHabitat(espe);
     }
 }

@@ -71,9 +71,11 @@ public class FachadaBaseDatos {
         daoEspec.borrarEspecimen(id,especie);
     }
     
-    
-    
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         daoEspec.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
+    
+    public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
+        return daoEspec.consultarCompHabitat(espe);
     }
 }

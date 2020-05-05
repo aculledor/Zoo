@@ -291,12 +291,17 @@ public class VEspecimenes extends javax.swing.JDialog {
     }//GEN-LAST:event_botonBorrarActionPerformed
 
     private void botonDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDetallesActionPerformed
-        fa.visualizarDetallesEspecimen(padre);
+        ModeloTablaEspecimenes m;
+        m=(ModeloTablaEspecimenes) tablaEspec.getModel();
+        fa.visualizarDetallesEspecimen(padre,m.obtenerEjemplar(tablaEspec.getSelectedRow()));
     }//GEN-LAST:event_botonDetallesActionPerformed
 
     private void tablaEspecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEspecMouseClicked
         ModeloTablaEspecimenes m;
         m=(ModeloTablaEspecimenes) tablaEspec.getModel();
+        
+        botonBorrar.setEnabled(true);
+        botonDetalles.setEnabled(true);
        
         fieldId.setText(Integer.toString(m.obtenerEjemplar(tablaEspec.getSelectedRow()).getIdentificador()));
         fieldEspecie.setText(m.obtenerEjemplar(tablaEspec.getSelectedRow()).getEspecie());
@@ -308,6 +313,7 @@ public class VEspecimenes extends javax.swing.JDialog {
         tablaEspec.clearSelection();
         
         botonBorrar.setEnabled(false);
+        botonDetalles.setEnabled(false);
         botonGuardar.setEnabled(true);
 
         fieldId.setText("");

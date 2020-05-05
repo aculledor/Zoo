@@ -5,6 +5,7 @@
  */
 package gui;
 
+import aplicacion.Especimen;
 import aplicacion.FachadaAplicacion;
 
 /**
@@ -20,7 +21,7 @@ public class VEspecimen extends javax.swing.JDialog {
     /**
      * Creates new form VEspecimenes
      */
-    public VEspecimen(java.awt.Frame parent, aplicacion.FachadaAplicacion fa) {
+    public VEspecimen(java.awt.Frame parent, aplicacion.FachadaAplicacion fa, Especimen espe) {
         super(parent);
         this.fa = fa;
         initComponents();
@@ -40,7 +41,7 @@ public class VEspecimen extends javax.swing.JDialog {
         mTablaReduc = new ModeloTablaEspecimenesReducido();
         tablaReduc.setModel(mTablaReduc);
         
-        this.setTablaReduc();
+        this.setTablaReduc(espe);
         
         if(mTablaReduc.getRowCount()> 0){
             tablaReduc.setRowSelectionInterval(0, 0);
@@ -51,8 +52,8 @@ public class VEspecimen extends javax.swing.JDialog {
         //mTablaTrat.setFilas(fa.consultarTratamientos());
     }
     
-    public final void setTablaReduc(){
-        mTablaReduc.setFilas(fa.consultarEspecimenes());
+    public final void setTablaReduc(Especimen espe){
+        mTablaReduc.setFilas(fa.consultarCompHabitat(espe));
     }
 
     /**

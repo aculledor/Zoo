@@ -154,4 +154,39 @@ public class DAOEspec extends AbstractDAO {
           try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+    
+    public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
+        java.util.List<Especimen> resultado = new java.util.ArrayList<>();
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select numero, especie, habitates, veterinarioid "
+                    + "from especimenes "
+                    + "where habitates like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+espe.getHabitat()+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
+                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
 }
