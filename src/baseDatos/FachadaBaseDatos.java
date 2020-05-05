@@ -5,6 +5,7 @@
 package baseDatos;
 
 import aplicacion.Especimen;
+import aplicacion.Tratamiento;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -77,5 +78,9 @@ public class FachadaBaseDatos {
     
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         return daoEspec.consultarCompHabitat(espe);
+    }
+    
+    public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
+        return daoEspec.consultarTratamientos(espe);
     }
 }

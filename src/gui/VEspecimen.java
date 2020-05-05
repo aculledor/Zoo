@@ -31,7 +31,7 @@ public class VEspecimen extends javax.swing.JDialog {
         mTablaTrat = new ModeloTablaTratamientos();
         tablaTratamientos.setModel(mTablaTrat);
         
-        this.setTablaTrat();
+        this.setTablaTrat(espe);
         
         if(mTablaTrat.getRowCount()> 0){
             tablaTratamientos.setRowSelectionInterval(0, 0);
@@ -42,14 +42,15 @@ public class VEspecimen extends javax.swing.JDialog {
         tablaReduc.setModel(mTablaReduc);
         
         this.setTablaReduc(espe);
+        this.fieldNombreHabitat.setText("Habitat "+espe.getHabitat());
         
         if(mTablaReduc.getRowCount()> 0){
             tablaReduc.setRowSelectionInterval(0, 0);
         }
     }
     
-    public final void setTablaTrat(){
-        //mTablaTrat.setFilas(fa.consultarTratamientos());
+    public final void setTablaTrat(Especimen espe){
+        mTablaTrat.setFilas(fa.consultarTratamientos(espe));
     }
     
     public final void setTablaReduc(Especimen espe){
@@ -68,17 +69,17 @@ public class VEspecimen extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         vHabitat = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        fieldNombreHabitat = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaReduc = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        fielDescripcionHabitat = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        fieldInfraestrucHabitat = new javax.swing.JTextArea();
         vDatos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaTratamientos = new javax.swing.JTable();
@@ -90,11 +91,14 @@ public class VEspecimen extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jTextField1.setText("Nombre Habitat");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        fieldNombreHabitat.setEditable(false);
+        fieldNombreHabitat.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        fieldNombreHabitat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        fieldNombreHabitat.setText("Nombre Habitat");
+        fieldNombreHabitat.setBorder(null);
+        fieldNombreHabitat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                fieldNombreHabitatActionPerformed(evt);
             }
         });
 
@@ -104,9 +108,10 @@ public class VEspecimen extends javax.swing.JDialog {
         tablaReduc.setModel(new ModeloTablaEspecimenesReducido());
         jScrollPane2.setViewportView(tablaReduc);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        fielDescripcionHabitat.setEditable(false);
+        fielDescripcionHabitat.setColumns(20);
+        fielDescripcionHabitat.setRows(5);
+        jScrollPane3.setViewportView(fielDescripcionHabitat);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Descripción del Hábitat");
@@ -114,9 +119,10 @@ public class VEspecimen extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("Infraestructuras del Hábitat");
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane4.setViewportView(jTextArea3);
+        fieldInfraestrucHabitat.setEditable(false);
+        fieldInfraestrucHabitat.setColumns(20);
+        fieldInfraestrucHabitat.setRows(5);
+        jScrollPane4.setViewportView(fieldInfraestrucHabitat);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -161,17 +167,17 @@ public class VEspecimen extends javax.swing.JDialog {
         vHabitat.setLayout(vHabitatLayout);
         vHabitatLayout.setHorizontalGroup(
             vHabitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vHabitatLayout.createSequentialGroup()
-                .addGap(257, 257, 257)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(vHabitatLayout.createSequentialGroup()
+                .addGap(269, 269, 269)
+                .addComponent(fieldNombreHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         vHabitatLayout.setVerticalGroup(
             vHabitatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vHabitatLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldNombreHabitat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -278,12 +284,15 @@ public class VEspecimen extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void fieldNombreHabitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreHabitatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_fieldNombreHabitatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea fielDescripcionHabitat;
+    private javax.swing.JTextArea fieldInfraestrucHabitat;
+    private javax.swing.JTextField fieldNombreHabitat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -297,9 +306,6 @@ public class VEspecimen extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tablaReduc;
     private javax.swing.JTable tablaTratamientos;
     private javax.swing.JScrollPane textHistorial;

@@ -41,4 +41,8 @@ public class GestionEspecimenes {
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         return fbd.consultarCompHabitat(espe);
     }
+    
+    public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
+        return fbd.consultarTratamientos(espe);
+    }
 }

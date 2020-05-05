@@ -60,4 +60,8 @@ public class FachadaAplicacion {
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         return ce.consultarCompHabitat(espe);
     }
+    
+    public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
+        return ce.consultarTratamientos(espe);
+    }
 }

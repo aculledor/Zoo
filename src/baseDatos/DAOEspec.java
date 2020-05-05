@@ -6,6 +6,7 @@
 package baseDatos;
 
 import aplicacion.Especimen;
+import aplicacion.Tratamiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -131,19 +132,27 @@ public class DAOEspec extends AbstractDAO {
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         Connection con;
         PreparedStatement stmUsuario=null;
+        String consulta;
         
         con=this.getConexion();
-        
-        String consulta = "insert into especimenes " + 
+        if(veterinario.equals("")){
+            consulta = "insert into especimenes " + 
                           "(numero, especie, habitates) " +
                           "values (?,?,?)";
+        }
+        else{
+            consulta = "insert into especimenes " + 
+                          "(numero, especie, habitates, veterinarioid) " +
+                          "values (?,?,?,?)";
+        }
         try  {
             stmUsuario=con.prepareStatement(consulta);
             
             stmUsuario.setInt(1, id);
             stmUsuario.setString(2, especie);
             stmUsuario.setString(3, habitat);
-            //stmUsuario.setString(4, veterinario);
+            if(!veterinario.equals(""))
+                stmUsuario.setString(4, veterinario);
             
             stmUsuario.executeUpdate();
 
@@ -175,6 +184,43 @@ public class DAOEspec extends AbstractDAO {
             while (rsCatalogo.next()) {
                 resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
                             rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid")));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
+        java.util.List<Tratamiento> resultado = new java.util.ArrayList<>();
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select cuidadorid, medicamentos, fechainicio, fechafin "
+                    + "from tratar "
+                    + "where especimennum = ? "
+                    + "and especimenea like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setInt(1, espe.getIdentificador());
+            stmCatalogo.setString(2, "%"+espe.getEspecie()+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado.add(new Tratamiento(rsCatalogo.getString("cuidadorid"), rsCatalogo.getString("medicamentos"),
+                            rsCatalogo.getString("fechainicio"), rsCatalogo.getString("fechafin")));
             }
 
         } catch (SQLException e) {
