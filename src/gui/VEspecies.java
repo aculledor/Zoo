@@ -7,6 +7,9 @@ package gui;
 
 import aplicacion.Especie;
 import aplicacion.FachadaAplicacion;
+import aplicacion.HabilidadMagica;
+import aplicacion.Protocolo;
+import aplicacion.Riesgo;
 
 /**
  *
@@ -16,6 +19,9 @@ public class VEspecies extends javax.swing.JDialog {
     private VPrincipal padre;
     private FachadaAplicacion fa;
     private ModeloTablaEspecies mTablaEspecies;
+    private ModeloTablaHabilidadesMagicas mTablaHabilidades;
+    private ModeloTablaRiesgos mTablaRiesgos;
+    private ModeloTablaProtocolos mTablaProtocolos;
     
     /**
      * Creates new form VEspecimenes
@@ -26,7 +32,7 @@ public class VEspecies extends javax.swing.JDialog {
         initComponents();
         this.padre = (VPrincipal) parent;
         
-        System.out.println("Hola0");
+        // ESPECIES
         
         mTablaEspecies = new ModeloTablaEspecies();
         jTable1.setModel(mTablaEspecies);
@@ -39,17 +45,77 @@ public class VEspecies extends javax.swing.JDialog {
         
         mostrarDatosEspecie();
         
-        //actualizarEspecimenes();
+        // HABILIDADES MAGICAS
+        
+        mTablaHabilidades = new ModeloTablaHabilidadesMagicas();
+        jTable2.setModel(mTablaHabilidades);
+        
+        mTablaHabilidades.setFilas(fa.consultarHabilidadesMagicas());
+        
+        if(mTablaEspecies.getRowCount()> 0){
+            jTable2.setRowSelectionInterval(0, 0);
+        }
+        
+        mostrarDatosHabilidadMagica();
+  
+        
+        // RIESGOS
+        
+        mTablaRiesgos = new ModeloTablaRiesgos();
+        jTable3.setModel(mTablaRiesgos);
+        
+        mTablaRiesgos.setFilas(fa.consultarRiesgos());
+        
+        if(mTablaRiesgos.getRowCount()> 0){
+            jTable3.setRowSelectionInterval(0, 0);
+        }
+        
+        mostrarDatosRiesgo();
+        
+        
+        
+        // PROTOCOLOS
+        
+        mTablaProtocolos = new ModeloTablaProtocolos();
+        jTable4.setModel(mTablaProtocolos);
+        
+        mTablaProtocolos.setFilas(fa.consultarProtocolos());
+        
+        if(mTablaProtocolos.getRowCount()> 0){
+            jTable4.setRowSelectionInterval(0, 0);
+        }
+        
+        mostrarDatosProtocolo();
+        
+        
+        
+        
+    
     }
     
-    public void actualizarTabla(){
+    public void actualizarTablaEspecies(){
         
         mTablaEspecies.setFilas(fa.consultarEspecies());
     }
     
+    public void actualizarTablaHabilidadesMagicas(){
+        
+        mTablaHabilidades.setFilas(fa.consultarHabilidadesMagicas());
+    }
+    
+    public void actualizarTablaRiesgos(){
+        
+        mTablaRiesgos.setFilas(fa.consultarRiesgos());
+    }
+    
+    public void actualizarTablaProtocolos(){
+        
+        mTablaProtocolos.setFilas(fa.consultarProtocolos());
+    }
     
     
-    public void mostrarDatosEspecie(){ //NOSU: mostramos los datos del usuario seleccionado
+    
+    public final void mostrarDatosEspecie(){
         
         if(!jTable1.getSelectionModel().isSelectionEmpty()) {
             
@@ -73,30 +139,72 @@ public class VEspecies extends javax.swing.JDialog {
             jTextField4.setText("");
             jTextField5.setText("");
             jTextField6.setText("");
-            jTextField7.setText("");jTextField2.setText("");
+            jTextField7.setText("");
+        }
+    }
+    
+    public final void mostrarDatosHabilidadMagica(){
+        
+        if(!jTable2.getSelectionModel().isSelectionEmpty()) {
+            
+            int fila = jTable2.getSelectedRow();
+            
+            HabilidadMagica pm = ((ModeloTablaHabilidadesMagicas)jTable2.getModel()).obtenerEjemplar(fila);
+            
+            jTextField8.setText(pm.getNombre());
+            jTextField9.setText(pm.getEfectos());
+            jTextField10.setText(pm.getAplicaciones());
+            
+        } else {
+            
+            jTextField8.setText("");
+            jTextField9.setText("");
+            jTextField10.setText("");
+        }
+    }
+    
+    public final void mostrarDatosRiesgo(){
+        
+        if(!jTable3.getSelectionModel().isSelectionEmpty()) {
+            
+            int fila = jTable3.getSelectedRow();
+            
+            Riesgo riesgo = ((ModeloTablaRiesgos)jTable3.getModel()).obtenerEjemplar(fila);
+            
+            jTextField11.setText(riesgo.getTipo());
+            jTextField12.setText(riesgo.getTratamiento());
+            
+        } else {
+            
+            jTextField11.setText("");
+            jTextField12.setText("");
+        }
+    }
+    
+    public final void mostrarDatosProtocolo(){
+        
+        if(!jTable4.getSelectionModel().isSelectionEmpty()) {
+            
+            int fila = jTable4.getSelectedRow();
+            
+            Protocolo protocolo = ((ModeloTablaProtocolos)jTable4.getModel()).obtenerEjemplar(fila);
+            
+            jTextField13.setText(protocolo.getIdentificador());
+            jTextField14.setText(protocolo.getDescripcion());
+            jTextField15.setText(protocolo.getEquipamiento());
+            
+        } else {
+            
+            jTextField13.setText("");
+            jTextField14.setText("");
+            jTextField15.setText("");
         }
     }
     
     
     
         
-        /*
-        QUEDA ESTO COMENTADO COMO GUIA
-        */
-        /*
-        mTablaTrat = new ModeloTablaTratamientos();
-        tablaTratamientos.setModel(mTablaTrat);
-        
-        this.setTablaTrat();
-        
-        if(mTablaTrat.getRowCount()> 0){
-            tablaTratamientos.setRowSelectionInterval(0, 0);
-        }
-    
-    public final void setTablaTrat(){
-        //mTablaTrat.setFilas(fa.consultarTratamientos());
-    }*/
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,6 +250,12 @@ public class VEspecies extends javax.swing.JDialog {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
@@ -151,6 +265,10 @@ public class VEspecies extends javax.swing.JDialog {
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField11 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField12 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jButton14 = new javax.swing.JButton();
@@ -161,6 +279,12 @@ public class VEspecies extends javax.swing.JDialog {
         jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField13 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jTextField14 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField15 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -373,7 +497,8 @@ public class VEspecies extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(501, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Especies", jPanel1);
@@ -408,13 +533,38 @@ public class VEspecies extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable2KeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
-        jButton7.setText("ACTUALIZAR");
+        jButton7.setText("GARDAR");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("NOVO");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("BORRAR");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -440,15 +590,54 @@ public class VEspecies extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel8.setText("Nombre");
+
+        jTextField8.setText("jTextField8");
+
+        jLabel9.setText("Efectos");
+
+        jLabel10.setText("Posibles Aplicaciones");
+
+        jTextField9.setText("jTextField9");
+
+        jTextField10.setText("jTextField10");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 806, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -465,10 +654,10 @@ public class VEspecies extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -504,13 +693,38 @@ public class VEspecies extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
+        jTable3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable3KeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
 
-        jButton11.setText("ACTUALIZAR");
+        jButton11.setText("GARDAR");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setText("BORRAR");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("NOVO");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -536,6 +750,14 @@ public class VEspecies extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel11.setText("Tipo");
+
+        jTextField11.setText("jTextField11");
+
+        jLabel12.setText("Tratamiento");
+
+        jTextField12.setText("jTextField12");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -543,14 +765,30 @@ public class VEspecies extends javax.swing.JDialog {
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane3)
             .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel11)
+                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 764, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -586,13 +824,38 @@ public class VEspecies extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
+        jTable4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable4KeyReleased(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable4);
 
-        jButton15.setText("ACTUALIZAR");
+        jButton15.setText("GARDAR");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
 
         jButton16.setText("NOVO");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jButton17.setText("BORRAR");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -618,15 +881,51 @@ public class VEspecies extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel13.setText("Id");
+
+        jTextField13.setText("jTextField13");
+
+        jLabel14.setText("Descripcion");
+
+        jTextField14.setText("jTextField14");
+
+        jLabel15.setText("Equipamiento");
+
+        jTextField15.setText("jTextField15");
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField14, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+                    .addComponent(jTextField15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 578, Short.MAX_VALUE)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -643,10 +942,10 @@ public class VEspecies extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -660,7 +959,10 @@ public class VEspecies extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -675,7 +977,7 @@ public class VEspecies extends javax.swing.JDialog {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here: BOTON GARDAR
+        // TODO add your handling code here: BOTON GARDAR ESPECIE
         
         Especie especie = new Especie(jTextField1.getText(),
                                       Integer.valueOf(jTextField2.getText()),
@@ -685,23 +987,22 @@ public class VEspecies extends javax.swing.JDialog {
                                       jTextField5.getText(),
                                       jTextField7.getText());
         
-        fa.guardarEspecie(especie); //NOSU: añade bien pero no modifica guardados bien!!!
+        fa.guardarEspecie(especie);
         
-        actualizarTabla();
+        actualizarTablaEspecies();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here: BOTON BORRAR
+        // TODO add your handling code here: BOTON BORRAR ESPECIE
         
-        System.out.println(jTextField1.getText());
+        fa.borrarEspecie(jTextField1.getText());
         
-        fa.borrarEspecie(jTextField1.getText());  
-        
-        actualizarTabla();
+        actualizarTablaEspecies();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here: BOTON NOVO
+        // TODO add your handling code here: BOTON NOVO ESPECIE
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
@@ -710,6 +1011,114 @@ public class VEspecies extends javax.swing.JDialog {
         jTextField6.setText("");
         jTextField7.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here: BOTON GARDAR HABILIDAD MAGICA
+        
+        HabilidadMagica pm = new HabilidadMagica(jTextField8.getText(),
+                                                jTextField9.getText(),
+                                                jTextField10.getText());
+        
+        fa.guardarHabilidadMagica(pm);
+        
+        actualizarTablaHabilidadesMagicas();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here: BOTON BORRAR HABILIDAD MAGICA
+        
+        fa.borrarHabilidadMagica(jTextField8.getText());
+        
+        actualizarTablaHabilidadesMagicas();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here: BOTON NOVO HABILIDAD MAGICA
+        jTextField8.setText("");
+        jTextField9.setText("");
+        jTextField10.setText("");
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here: BOTON GARDAR RIESGO
+        
+        Riesgo riesgo = new Riesgo(jTextField11.getText(), jTextField12.getText());
+        
+        fa.guardarRiesgo(riesgo);
+        
+        actualizarTablaRiesgos();
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here: BOTON BORRAR RIESGO
+        
+        fa.borrarRiesgo(jTextField11.getText());
+        
+        actualizarTablaRiesgos();
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here: BOTON NOVO RIESGO
+        jTextField11.setText("");
+        jTextField12.setText("");
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here: BOTON GARDAR PROTOCOLO
+        
+        Protocolo protocolo = new Protocolo(jTextField13.getText(),
+                                            jTextField14.getText(),
+                                            jTextField15.getText());
+        
+        fa.guardarProtocolo(protocolo);
+        
+        actualizarTablaProtocolos();
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here: BOTON BORRAR PROTOCOLO
+        
+        fa.borrarProtocolo(jTextField13.getText());
+        
+        actualizarTablaProtocolos();
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here: BOTON NOVO PROTOCOLO
+        jTextField13.setText("");
+        jTextField14.setText("");
+        jTextField15.setText("");
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        mostrarDatosHabilidadMagica();
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jTable2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyReleased
+        // TODO add your handling code here:
+        mostrarDatosHabilidadMagica();
+    }//GEN-LAST:event_jTable2KeyReleased
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+        mostrarDatosRiesgo();
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jTable3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable3KeyReleased
+        // TODO add your handling code here:
+        mostrarDatosRiesgo();
+    }//GEN-LAST:event_jTable3KeyReleased
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        // TODO add your handling code here:
+        mostrarDatosProtocolo();
+    }//GEN-LAST:event_jTable4MouseClicked
+
+    private void jTable4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable4KeyReleased
+        // TODO add your handling code here:
+        mostrarDatosProtocolo();
+    }//GEN-LAST:event_jTable4KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -731,12 +1140,20 @@ public class VEspecies extends javax.swing.JDialog {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -762,11 +1179,21 @@ public class VEspecies extends javax.swing.JDialog {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+
+
 }

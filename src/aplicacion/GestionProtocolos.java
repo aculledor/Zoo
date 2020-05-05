@@ -13,26 +13,26 @@ import java.sql.SQLException;
  *
  * @author nosu
  */
-public class GestionEspecies {
+public class GestionProtocolos {
     
     private FachadaGui fgui;
     private FachadaBaseDatos fbd;
 
-    public GestionEspecies(FachadaGui fgui, FachadaBaseDatos fbd) {
+    public GestionProtocolos(FachadaGui fgui, FachadaBaseDatos fbd) {
         this.fgui = fgui;
         this.fbd = fbd;
     }
     
     
-    public java.util.List<Especie> consultarEspecies(){
-        return fbd.consultarEspecies();
+    public java.util.List<Protocolo> consultarProtocolos(){
+        return fbd.consultarProtocolos();
     }
     
-    public void guardarEspecie(Especie especie){
+    public void guardarProtocolo(Protocolo protocolo){
         
         try {
             
-            fbd.insertarEspecie(especie);
+            fbd.insertarProtocolo(protocolo);
             
         } catch(SQLException e){
             
@@ -40,19 +40,18 @@ public class GestionEspecies {
             
             try{
                 
-                fbd.modificarEspecie(especie);
+                fbd.modificarProtocolo(protocolo);
                 
             } catch(SQLException e2) {
             
             System.out.println(e2.getMessage());
             
             }
-            
         }
     }
     
-    public void borrarEspecie(String especie_id){
-        fbd.eliminarEspecie(especie_id);
+    public void borrarProtocolo(String especie_id){
+        fbd.eliminarProtocolo(especie_id);
     }
     
 }

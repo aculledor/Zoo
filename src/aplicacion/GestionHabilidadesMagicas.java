@@ -13,26 +13,26 @@ import java.sql.SQLException;
  *
  * @author nosu
  */
-public class GestionEspecies {
+public class GestionHabilidadesMagicas {
     
     private FachadaGui fgui;
     private FachadaBaseDatos fbd;
 
-    public GestionEspecies(FachadaGui fgui, FachadaBaseDatos fbd) {
+    public GestionHabilidadesMagicas(FachadaGui fgui, FachadaBaseDatos fbd) {
         this.fgui = fgui;
         this.fbd = fbd;
     }
     
     
-    public java.util.List<Especie> consultarEspecies(){
-        return fbd.consultarEspecies();
+    public java.util.List<HabilidadMagica> consultarHabilidadesMagicas(){
+        return fbd.consultarHabilidadesMagicas();
     }
     
-    public void guardarEspecie(Especie especie){
+    public void guardarHabilidadMagica(HabilidadMagica habilidad){
         
         try {
             
-            fbd.insertarEspecie(especie);
+            fbd.insertarHabilidadMagica(habilidad);
             
         } catch(SQLException e){
             
@@ -40,7 +40,7 @@ public class GestionEspecies {
             
             try{
                 
-                fbd.modificarEspecie(especie);
+                fbd.modificarHabilidadMagica(habilidad);
                 
             } catch(SQLException e2) {
             
@@ -51,8 +51,8 @@ public class GestionEspecies {
         }
     }
     
-    public void borrarEspecie(String especie_id){
-        fbd.eliminarEspecie(especie_id);
+    public void borrarHabilidadMagica(String especie_id){
+        fbd.eliminarHabilidadMagica(especie_id);
     }
     
 }

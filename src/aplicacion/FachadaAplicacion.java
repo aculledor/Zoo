@@ -18,12 +18,18 @@ public class FachadaAplicacion {
     baseDatos.FachadaBaseDatos fbd;
     GestionEspecimenes ce;
     GestionEspecies cea;
+    GestionHabilidadesMagicas cpm;
+    GestionRiesgos cr;
+    GestionProtocolos cp;
 
     public FachadaAplicacion() {
         fgui = new gui.FachadaGui(this);
         fbd = new baseDatos.FachadaBaseDatos(this);
         ce = new GestionEspecimenes(fgui, fbd);
         cea = new GestionEspecies(fgui,fbd);
+        cpm = new GestionHabilidadesMagicas(fgui,fbd);
+        cr = new GestionRiesgos(fgui,fbd);
+        cp = new GestionProtocolos(fgui,fbd);
     }
 
     public static void main(String args[]) {
@@ -60,7 +66,6 @@ public class FachadaAplicacion {
         fgui.visualizarDetallesEspecimen(padre);
     }
     
-    
     public void guardarEspecie(Especie especie){
         cea.guardarEspecie(especie);
     }
@@ -68,4 +73,42 @@ public class FachadaAplicacion {
     public void borrarEspecie(String especie_id){
         cea.borrarEspecie(especie_id);
     }
+    
+    public java.util.List<HabilidadMagica> consultarHabilidadesMagicas(){
+        return cpm.consultarHabilidadesMagicas();
+    }
+    
+    public void guardarHabilidadMagica(HabilidadMagica pm){
+        cpm.guardarHabilidadMagica(pm);
+    }
+    
+    public void borrarHabilidadMagica(String especie_id){
+        cpm.borrarHabilidadMagica(especie_id);
+    }
+    
+    public java.util.List<Riesgo> consultarRiesgos(){
+        return cr.consultarRiesgos();
+    }
+    
+    public void guardarRiesgo(Riesgo riesgo){
+        cr.guardarRiesgo(riesgo);
+    }
+    
+    public void borrarRiesgo(String especie_id){
+        cr.borrarRiesgo(especie_id);
+    }
+    
+    public java.util.List<Protocolo> consultarProtocolos(){
+        return cp.consultarProtocolos();
+    }
+    
+    public void guardarProtocolo(Protocolo protocolo){
+        cp.guardarProtocolo(protocolo);
+    }
+    
+    public void borrarProtocolo(String especie_id){
+        cp.borrarProtocolo(especie_id);
+    }
+    
+    
 }
