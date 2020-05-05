@@ -65,4 +65,15 @@ public class FachadaBaseDatos {
     public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento){
         return daoEspec.obtenerEspecimenes(id,especie,habitat,enTratamiento);
     }
+    
+    
+    public void borrarEspecimen(int id, String especie){
+        daoEspec.borrarEspecimen(id,especie);
+    }
+    
+    
+    
+    public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
+        daoEspec.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
 }

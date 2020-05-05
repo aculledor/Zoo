@@ -29,4 +29,12 @@ public class GestionEspecimenes {
     public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento){
         return fbd.obtenerEspecimenes(id,especie,habitat,enTratamiento);
     }
+    
+    public void borrarEspecimen(int id, String especie){
+        fbd.borrarEspecimen(id,especie);
+    }
+    
+    public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
+        fbd.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
 }

@@ -104,4 +104,54 @@ public class DAOEspec extends AbstractDAO {
         }
         return resultado;
     }
+    
+    public void borrarEspecimen(int id, String especie){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+
+        con=this.getConexion();
+
+        try {
+        stmUsuario=con.prepareStatement("delete from especimenes "+
+                                        "where numero = ? "+
+                                        "and especie like ?");
+        stmUsuario.setInt(1, id);
+        stmUsuario.setString(2, especie);
+        stmUsuario.executeUpdate();
+
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    
+    public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        
+        con=this.getConexion();
+        
+        String consulta = "insert into especimenes " + 
+                          "(numero, especie, habitates) " +
+                          "values (?,?,?)";
+        try  {
+            stmUsuario=con.prepareStatement(consulta);
+            
+            stmUsuario.setInt(1, id);
+            stmUsuario.setString(2, especie);
+            stmUsuario.setString(3, habitat);
+            //stmUsuario.setString(4, veterinario);
+            
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
 }

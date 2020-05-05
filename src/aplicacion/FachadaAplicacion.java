@@ -48,4 +48,12 @@ public class FachadaAplicacion {
     public void visualizarDetallesEspecimen(VPrincipal padre){
         fgui.visualizarDetallesEspecimen(padre);
     }
+    
+    public void borrarEspecimen(int id, String especie){
+        ce.borrarEspecimen(id,especie);
+    }
+    
+    public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
+        ce.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
 }
