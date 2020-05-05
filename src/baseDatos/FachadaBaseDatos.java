@@ -4,6 +4,7 @@
  */
 package baseDatos;
 
+import aplicacion.Especie;
 import aplicacion.Especimen;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ public class FachadaBaseDatos {
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
     private DAOEspec daoEspec;
+    private DAOEspAnim daoEspAnim;
     //private DAOCategorias daoCategorias;
     //private DAOUsuarios daoUsuarios;
 
@@ -44,6 +46,7 @@ public class FachadaBaseDatos {
                     usuario);
 
             daoEspec = new DAOEspec(conexion, fa);
+            daoEspAnim  = new DAOEspAnim(conexion,fa);
 
         } catch (FileNotFoundException f) {
             System.out.println(f.getMessage());
@@ -65,4 +68,23 @@ public class FachadaBaseDatos {
     public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento){
         return daoEspec.obtenerEspecimenes(id,especie,habitat,enTratamiento);
     }
+    
+    public java.util.List<Especie> consultarEspecies(){
+       return daoEspAnim.consultarEspecies();
+    }
+    
+    public void insertarEspecie(Especie especie) throws SQLException {
+        daoEspAnim.insertarEspecie(especie);
+    }
+    
+    public void modificarEspecie(Especie especie) throws SQLException {
+        daoEspAnim.insertarEspecie(especie);
+    }
+    
+    public void eliminarEspecie(String especie_id){
+        daoEspAnim.eliminarEspecie(especie_id);
+    }
+    
+    
+    
 }

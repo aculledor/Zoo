@@ -7,7 +7,6 @@ package baseDatos;
 
 import aplicacion.Especie;
 import java.sql.Connection;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +35,8 @@ public class DAOEspAnim extends AbstractDAO{
         try{
             
             String consulta = "select nombreea, esperanzavida, descripcionanatomica,"
-                    + "patalogiascomunes, nivelpeligro, comportamientocomun, dieta";
+                    + "patologiascomunes, nivelpeligro, comportamientocomun, dieta"
+                    + " from especiesanimales";
             
             stmCatalogo = con.prepareStatement(consulta);
             
@@ -44,7 +44,7 @@ public class DAOEspAnim extends AbstractDAO{
             
             while (rsCatalogo.next()) {
                 resultado.add(new Especie(rsCatalogo.getString("nombreea"), rsCatalogo.getInt("esperanzavida"),
-                            rsCatalogo.getString("descripcionanatomica"), rsCatalogo.getString("patalogiascomunes"),
+                            rsCatalogo.getString("descripcionanatomica"), rsCatalogo.getString("patologiascomunes"),
                             rsCatalogo.getInt("nivelpeligro"), rsCatalogo.getString("comportamientocomun"), rsCatalogo.getString("dieta")));
             }
             
@@ -65,6 +65,146 @@ public class DAOEspAnim extends AbstractDAO{
         }
         
         return resultado;
+    }
+    
+    
+    public void insertarEspecie(Especie especie) throws SQLException {
+        
+        Connection con;
+        PreparedStatement stmCatalogo=null;
+        
+        con=super.getConexion();
+        
+        //try{
+            
+            stmCatalogo=con.prepareStatement("insert into especiesanimales(nombreea,"
+                    + "esperanzavida, descripcionanatomica, patologiascomunes,"
+                    + "nivelpeligro, comportamientocomun, dieta) "+
+                                      "values (?,?,?,?,?,?,?)");
+            
+            stmCatalogo.setString(1, especie.getNombre());
+            stmCatalogo.setInt(2, especie.getEspVida());
+            stmCatalogo.setString(3, especie.getDescAnat());
+            stmCatalogo.setString(4, especie.getComonPat());
+            stmCatalogo.setInt(5, especie.getPeligrosidad());
+            stmCatalogo.setString(6, especie.getDescComp());
+            stmCatalogo.setString(7, especie.getDieta());
+            
+            stmCatalogo.executeUpdate();
+            
+        /*    
+        } catch(SQLException e) {
+            
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            
+        } finally {
+            
+            try {
+                stmCatalogo.close();
+                
+            } catch (SQLException e) {
+                
+                System.out.println("Imposible cerrar cursores");
+            }
+        }*/
+        
+        try {
+                stmCatalogo.close();
+                
+            } catch (SQLException e) {
+                
+                System.out.println("Imposible cerrar cursores");
+            }
+    }
+    
+    
+    public void modificarEspecie(Especie especie)  throws SQLException{
+        
+        Connection con;
+        PreparedStatement stmCatalogo=null;
+        
+        con=super.getConexion();
+        
+        //try{
+            
+            stmCatalogo=con.prepareStatement("update especiesanimales "+
+                                    "set esperanzavida=?, "+
+                                    "descripcionanatomica=?,"+
+                                    "patologiascomunes=?,"+
+                                    "nivelpeligro=?,"+
+                                    "comportamientocomun=?,"+
+                                    "dieta=?"+
+                                    "where nombreea=?");
+            
+           
+            stmCatalogo.setInt(1, especie.getEspVida());
+            stmCatalogo.setString(2, especie.getDescAnat());
+            stmCatalogo.setString(3, especie.getComonPat());
+            stmCatalogo.setInt(4, especie.getPeligrosidad());
+            stmCatalogo.setString(5, especie.getDescComp());
+            stmCatalogo.setString(6, especie.getDieta());
+            stmCatalogo.setString(7, especie.getNombre());
+            
+            stmCatalogo.executeUpdate();
+        
+        /*
+        } catch(SQLException e) {
+            
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            
+        } finally {
+            
+            try {
+                stmCatalogo.close();
+                
+            } catch (SQLException e) {
+                
+                System.out.println("Imposible cerrar cursores");
+            }
+        }*/
+        
+        try {
+                stmCatalogo.close();
+                
+            } catch (SQLException e) {
+                
+                System.out.println("Imposible cerrar cursores");
+            }
+    }
+    
+    
+    public void eliminarEspecie(String id){
+        
+        Connection con;
+        PreparedStatement stmCatalogo=null;
+        
+        con=super.getConexion();
+        
+        try{
+            
+            stmCatalogo=con.prepareStatement("delete from especiesanimales where nombreea=?");
+            
+            stmCatalogo.setString(1, id);
+            
+            stmCatalogo.executeUpdate();
+            
+        } catch(SQLException e) {
+            
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            
+        } finally {
+            
+            try {
+                stmCatalogo.close();
+                
+            } catch (SQLException e) {
+                
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
     }
     
     
