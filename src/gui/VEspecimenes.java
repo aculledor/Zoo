@@ -329,8 +329,9 @@ public class VEspecimenes extends javax.swing.JDialog {
                         fieldVeterinario.getText());
             }
             else{
-                ModeloTablaEspecimenes mtu = (ModeloTablaEspecimenes) tablaEspec.getModel();
-                //fa.actualizarEspecimen();
+                ModeloTablaEspecimenes mte = (ModeloTablaEspecimenes) tablaEspec.getModel();
+                fa.actualizarEspecimen(mte.obtenerEjemplar(tablaEspec.getSelectedRow()).getIdentificador(),Integer.parseInt(fieldId.getText()),fieldEspecie.getText(),fieldHabitat.getText(),
+                        fieldVeterinario.getText());
             }
             buscarEspecimenes();
         }

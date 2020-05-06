@@ -46,6 +46,8 @@ public class VEspecimen extends javax.swing.JDialog {
         
         this.setTablaReduc();
         this.fieldNombreHabitat.setText("Habitat "+especimen.getHabitat());
+        this.fielDescripcionHabitat.setText(fa.consultarDescHabitat(especimen.getHabitat()));
+        this.fieldInfraestrucHabitat.setText(fa.consultarInfrHabitat(especimen.getHabitat()));
         
         if(mTablaReduc.getRowCount()> 0){
             tablaReduc.setRowSelectionInterval(0, 0);

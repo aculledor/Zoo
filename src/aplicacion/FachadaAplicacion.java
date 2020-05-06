@@ -74,8 +74,20 @@ public class FachadaAplicacion {
         ce.nuevoEspecimen(id,especie,habitat,veterinario);
     }
     
+    public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
+        ce.actualizarEspecimen(idAntiguo, idNuevo,especie,habitat,veterinario);
+    }
+    
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         return ce.consultarCompHabitat(espe);
+    }
+    
+    public String consultarDescHabitat(String habitat){
+        return ce.consultarDescHabitat(habitat);
+    }
+    
+    public String consultarInfrHabitat(String habitat){
+        return ce.consultarInfrHabitat(habitat);
     }
     
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
@@ -85,6 +97,8 @@ public class FachadaAplicacion {
     public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
         ce.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
     }
+    
+    ///////////////////////////////////////////////////////
     
     public void guardarEspecie(Especie especie){
         cea.guardarEspecie(especie);

@@ -38,8 +38,20 @@ public class GestionEspecimenes {
         fbd.nuevoEspecimen(id,especie,habitat,veterinario);
     }
     
+    public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
+        fbd.actualizarEspecimen(idAntiguo, idNuevo, especie ,habitat, veterinario);
+    }
+    
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         return fbd.consultarCompHabitat(espe);
+    }
+    
+    public String consultarDescHabitat(String habitat){
+        return fbd.consultarDescHabitat(habitat);
+    }
+    
+    public String consultarInfrHabitat(String habitat){
+        return fbd.consultarInfrHabitat(habitat);
     }
     
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){

@@ -90,8 +90,20 @@ public class FachadaBaseDatos {
         daoEspec.nuevoEspecimen(id,especie,habitat,veterinario);
     }
     
+    public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
+        daoEspec.actualizarEspecimen(idAntiguo, idNuevo, especie, habitat, veterinario);
+    }
+    
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         return daoEspec.consultarCompHabitat(espe);
+    }
+    
+    public String consultarDescHabitat(String habitat){
+        return daoEspec.consultarDescHabitat(habitat);
+    }
+    
+    public String consultarInfrHabitat(String habitat){
+        return daoEspec.consultarInfrHabitat(habitat);
     }
     
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
