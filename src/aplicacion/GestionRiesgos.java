@@ -55,4 +55,8 @@ public class GestionRiesgos {
         fbd.eliminarRiesgo(especie_id);
     }
     
+    public java.util.List<Riesgo> obteneRiesgos(String tipo, String tratamiento) {
+        return fbd.obteneRiesgos(tipo, tratamiento);
+    }
+    
 }

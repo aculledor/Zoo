@@ -55,4 +55,8 @@ public class GestionHabilidadesMagicas {
         fbd.eliminarHabilidadMagica(especie_id);
     }
     
+    public java.util.List<HabilidadMagica> obtenerHabilidadesMagicas(String nombre, String efectos, String aplicaciones){
+        return fbd.obtenerHabilidadesMagicas(nombre, efectos, aplicaciones);
+    }
+    
 }

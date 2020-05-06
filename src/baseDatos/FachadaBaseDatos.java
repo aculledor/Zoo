@@ -97,6 +97,10 @@ public class FachadaBaseDatos {
         daoEspAnim.eliminarEspecie(especie_id);
     }
     
+    public java.util.List<Especie> obtenerEspecies(String nombre, Integer vida, Integer peligrosidad, String dieta) {
+        return daoEspAnim.obtenerEspecies(nombre, vida, peligrosidad, dieta);
+    }
+    
     public java.util.List<HabilidadMagica> consultarHabilidadesMagicas(){
        return daoHabMag.consultarHabilidadesMagicas();
     }
@@ -111,6 +115,10 @@ public class FachadaBaseDatos {
     
     public void eliminarHabilidadMagica(String especie_id){
         daoHabMag.eliminarHabilidadMagica(especie_id);
+    }
+    
+    public java.util.List<HabilidadMagica> obtenerHabilidadesMagicas(String nombre, String efectos, String aplicaciones){
+        return daoHabMag.obtenerHabilidadesMagicas(nombre, efectos, aplicaciones);
     }
     
     public java.util.List<Riesgo> consultarRiesgos(){
@@ -129,6 +137,10 @@ public class FachadaBaseDatos {
         daoRiesg.eliminarRiesgo(especie_id);
     }
     
+    public java.util.List<Riesgo> obteneRiesgos(String tipo, String tratamiento) {
+        return daoRiesg.obteneRiesgos(tipo, tratamiento);
+    }
+    
     public java.util.List<Protocolo> consultarProtocolos(){
        return daoProtoc.consultarProtocolos();
     }
@@ -145,6 +157,9 @@ public class FachadaBaseDatos {
         daoProtoc.eliminarProtocolo(especie_id);
     }
     
+    public java.util.List<Protocolo> obteneProtocolos(String id, String descripcion, String equipamiento) {
+        return daoProtoc.obteneProtocolos(id, descripcion, equipamiento);
+    }
     
     
 }

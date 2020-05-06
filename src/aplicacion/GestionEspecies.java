@@ -55,4 +55,8 @@ public class GestionEspecies {
         fbd.eliminarEspecie(especie_id);
     }
     
+    public java.util.List<Especie> obtenerEspecies(String nombre, Integer vida, Integer peligrosidad, String dieta) {
+        return fbd.obtenerEspecies(nombre, vida, peligrosidad, dieta);
+    }
+    
 }

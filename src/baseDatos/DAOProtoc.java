@@ -155,4 +155,56 @@ public class DAOProtoc extends AbstractDAO {
         }
     }
     
+    
+    
+    public java.util.List<Protocolo> obteneProtocolos(String id, String descripcion, String equipamiento) {
+        
+        java.util.List<Protocolo> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select designacionpro, descripcionpro, equipamiento"
+                            + " from protocolos as pro where designacionpro like ? "
+                            + " and  descripcionpro like ? and equipamiento like ?";
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            
+            stmCatalogo.setString(1, "%"+id+"%");
+            stmCatalogo.setString(2, "%"+descripcion+"%");
+            stmCatalogo.setString(3, "%"+equipamiento+"%");
+            
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            
+            while (rsCatalogo.next()) {
+                resultado.add(new Protocolo(rsCatalogo.getString("designacionpro"),
+                                                   rsCatalogo.getString("descripcionpro"),
+                                                    rsCatalogo.getString("equipamiento")));
+            }
+
+        } catch (SQLException e) {
+            
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            
+        } finally {
+            
+            try {
+                
+                stmCatalogo.close();
+                
+            } catch (SQLException e) {
+                
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        
+        return resultado;
+    }
 }

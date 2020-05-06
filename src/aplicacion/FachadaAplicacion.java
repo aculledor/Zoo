@@ -74,6 +74,10 @@ public class FachadaAplicacion {
         cea.borrarEspecie(especie_id);
     }
     
+    public java.util.List<Especie> obtenerEspecies(String nombre, Integer vida, Integer peligrosidad, String dieta) {
+        return cea.obtenerEspecies(nombre, vida, peligrosidad, dieta);
+    }
+    
     public java.util.List<HabilidadMagica> consultarHabilidadesMagicas(){
         return cpm.consultarHabilidadesMagicas();
     }
@@ -84,6 +88,10 @@ public class FachadaAplicacion {
     
     public void borrarHabilidadMagica(String especie_id){
         cpm.borrarHabilidadMagica(especie_id);
+    }
+    
+    public java.util.List<HabilidadMagica> obtenerHabilidadesMagicas(String nombre, String efectos, String aplicaciones){
+        return cpm.obtenerHabilidadesMagicas(nombre, efectos, aplicaciones);
     }
     
     public java.util.List<Riesgo> consultarRiesgos(){
@@ -98,6 +106,10 @@ public class FachadaAplicacion {
         cr.borrarRiesgo(especie_id);
     }
     
+    public java.util.List<Riesgo> obteneRiesgos(String tipo, String tratamiento) {
+        return cr.obteneRiesgos(tipo, tratamiento);
+    }
+    
     public java.util.List<Protocolo> consultarProtocolos(){
         return cp.consultarProtocolos();
     }
@@ -110,5 +122,8 @@ public class FachadaAplicacion {
         cp.borrarProtocolo(especie_id);
     }
     
+    public java.util.List<Protocolo> obteneProtocolos(String id, String descripcion, String equipamiento) {
+        return cp.obteneProtocolos(id, descripcion, equipamiento);
+    }
     
 }

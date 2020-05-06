@@ -54,4 +54,8 @@ public class GestionProtocolos {
         fbd.eliminarProtocolo(especie_id);
     }
     
+    public java.util.List<Protocolo> obteneProtocolos(String id, String descripcion, String equipamiento) {
+        return fbd.obteneProtocolos(id, descripcion, equipamiento);
+    }
+    
 }
