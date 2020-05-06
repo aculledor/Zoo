@@ -36,8 +36,6 @@ public class GestionHabilidadesMagicas {
             
         } catch(SQLException e){
             
-            System.out.println(e.getMessage());
-            
             try{
                 
                 fbd.modificarHabilidadMagica(habilidad);

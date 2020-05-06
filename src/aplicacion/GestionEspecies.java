@@ -36,8 +36,6 @@ public class GestionEspecies {
             
         } catch(SQLException e){
             
-            System.out.println(e.getMessage());
-            
             try{
                 
                 fbd.modificarEspecie(especie);
