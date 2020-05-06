@@ -118,6 +118,10 @@ public class FachadaAplicacion {
         ce.nuevoTratamiento(espe, cuidador, medicamentos, fechafin);
     }
     
+    public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        ce.actualizarTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    }
+    
     ///////////////////////////////////////////////////////
     
     public void guardarEspecie(Especie especie){

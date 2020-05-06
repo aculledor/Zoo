@@ -134,6 +134,10 @@ public class FachadaBaseDatos {
     public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
         daoEspec.nuevoTratamiento(espe, cuidador, medicamentos, fechafin);
     }
+    
+    public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        daoEspec.actualizarTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    }
 
     // NOSU
     

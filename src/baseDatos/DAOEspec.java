@@ -37,7 +37,8 @@ public class DAOEspec extends AbstractDAO {
         try {
 
             String consulta = "select numero, especie, habitates, veterinarioid, historialmedico "
-                + "from especimenes";
+                + "from especimenes "
+                + "order by  especie, numero";
         
             stmCatalogo = con.prepareStatement(consulta);
             rsCatalogo = stmCatalogo.executeQuery();
@@ -58,7 +59,6 @@ public class DAOEspec extends AbstractDAO {
         }
         return resultado;
     }
-    
     
     public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento) {
         java.util.List<Especimen> resultado = new java.util.ArrayList<>();
@@ -131,7 +131,6 @@ public class DAOEspec extends AbstractDAO {
         }
     }
     
-    
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -166,6 +165,40 @@ public class DAOEspec extends AbstractDAO {
           try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+    
+    public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        
+        con=this.getConexion();
+        
+        String consulta = "update especimenes " + 
+                          "set numero = ?, "
+                        + "especie = ?, "
+                        + "habitates = ?, "
+                        + "veterinarioid = ? "
+                        + "where numero = ? "
+                        + "and especie like ? ";
+        try  {
+            stmUsuario=con.prepareStatement(consulta);
+            
+            stmUsuario.setInt(1, idNuevo);
+            stmUsuario.setString(2, especie);
+            stmUsuario.setString(3, habitat);
+            stmUsuario.setString(4, veterinario);
+            stmUsuario.setInt(5, idAntiguo);
+            //stmUsuario.setInt(5, especieAntigua);
+            
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
     
     public int aforoMaximo(String habitat){
         int resultado=0;
@@ -338,39 +371,6 @@ public class DAOEspec extends AbstractDAO {
         
     }
     
-    public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
-        Connection con;
-        PreparedStatement stmUsuario=null;
-        
-        con=this.getConexion();
-        
-        String consulta = "update especimenes " + 
-                          "set numero = ?, "
-                        + "especie = ?, "
-                        + "habitates = ?, "
-                        + "veterinarioid = ? "
-                        + "where numero = ? "
-                        + "and especie like ? ";
-        try  {
-            stmUsuario=con.prepareStatement(consulta);
-            
-            stmUsuario.setInt(1, idNuevo);
-            stmUsuario.setString(2, especie);
-            stmUsuario.setString(3, habitat);
-            stmUsuario.setString(4, veterinario);
-            stmUsuario.setInt(5, idAntiguo);
-            //stmUsuario.setInt(5, especieAntigua);
-            
-            stmUsuario.executeUpdate();
-
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-        }
-    }
-        
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         java.util.List<Especimen> resultado = new java.util.ArrayList<>();
         Connection con;
@@ -383,10 +383,16 @@ public class DAOEspec extends AbstractDAO {
 
             String consulta = "select numero, especie, habitates, veterinarioid, historialmedico "
                     + "from especimenes "
-                    + "where habitates like ? ";
+                    + "where habitates like ? "
+                    + "and (numero, especie) != (select numero, especie "
+                    +                           "from especimenes "
+                    +                           "where numero = ? "
+                    +                           "and especie like ?) ";
         
             stmCatalogo = con.prepareStatement(consulta);
             stmCatalogo.setString(1, "%"+espe.getHabitat()+"%");
+            stmCatalogo.setInt(2, espe.getIdentificador());
+            stmCatalogo.setString(3, "%"+espe.getEspecie()+"%");
             rsCatalogo = stmCatalogo.executeQuery();
             while (rsCatalogo.next()) {
                 resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
@@ -477,6 +483,7 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
         java.util.List<Tratamiento> resultado = new java.util.ArrayList<>();
         Connection con;
@@ -490,7 +497,8 @@ public class DAOEspec extends AbstractDAO {
             String consulta = "select cuidadorid, medicamentos, fechainicio, fechafin "
                     + "from tratar "
                     + "where especimennum = ? "
-                    + "and especimenea like ? ";
+                    + "and especimenea like ? "
+                    + "order by fechainicio ";
         
             stmCatalogo = con.prepareStatement(consulta);
             stmCatalogo.setInt(1, espe.getIdentificador());
@@ -522,7 +530,7 @@ public class DAOEspec extends AbstractDAO {
         java.sql.Date sqlDateFin = java.sql.Date.valueOf(fechafin); 
         
         con=this.getConexion();
-        if(!fechafin.equals("") && todayLocalDate.isBefore(sqlDateFin.toLocalDate())){
+        if(!fechafin.equals("") && !todayLocalDate.isAfter(sqlDateFin.toLocalDate())){
             consulta = "insert into tratar " + 
                           "(especimenea, especimennum, cuidadorid, medicamentos, fechafin) " +
                           "values (?,?,?,?,?)";
@@ -553,4 +561,69 @@ public class DAOEspec extends AbstractDAO {
         }
     }
     
+    public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        java.sql.Date sqlDateInicio = java.sql.Date.valueOf(fechainicio); 
+        java.sql.Date sqlDateFin=null;
+        
+        if(!fechafin.equals("")){
+            sqlDateFin = java.sql.Date.valueOf(fechafin); 
+        }
+        
+        con=this.getConexion();
+        
+        String consulta = "update tratar " + 
+                          "set cuidadorid = ?, ";
+                
+        if(!fechafin.equals("") && !sqlDateInicio.toLocalDate().isAfter(sqlDateFin.toLocalDate())){
+            consulta += "fechafin = ?, "
+                        + "medicamentos = ? "
+                        + "where especimenea like ? "
+                        + "and especimennum = ? "
+                        + "and fechainicio = ? ";
+            try  {
+                stmUsuario=con.prepareStatement(consulta);
+
+                stmUsuario.setString(1, cuidador);
+                stmUsuario.setDate(2, sqlDateFin);
+                stmUsuario.setString(3, medicamentos);
+                stmUsuario.setString(4, espe.getEspecie());
+                stmUsuario.setInt(5, espe.getIdentificador());
+                stmUsuario.setDate(6, sqlDateInicio);
+
+                stmUsuario.executeUpdate();
+
+            } catch (SQLException e){
+              System.out.println(e.getMessage());
+              this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }finally{
+              try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            }
+        }
+        else{
+            consulta += "medicamentos = ? "
+                        + "where especimenea like ? "
+                        + "and especimennum = ? "
+                        + "and fechainicio = ? ";
+            try  {
+                stmUsuario=con.prepareStatement(consulta);
+
+                stmUsuario.setString(1, cuidador);
+                stmUsuario.setString(2, medicamentos);
+                stmUsuario.setString(3, espe.getEspecie());
+                stmUsuario.setInt(4, espe.getIdentificador());
+                stmUsuario.setDate(5, sqlDateInicio);
+
+                stmUsuario.executeUpdate();
+
+            } catch (SQLException e){
+              System.out.println(e.getMessage());
+              this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }finally{
+              try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            }
+        }
+    }
+
 }

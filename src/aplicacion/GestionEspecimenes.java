@@ -81,4 +81,8 @@ public class GestionEspecimenes {
     public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
         fbd.nuevoTratamiento(espe, cuidador, medicamentos, fechafin);
     }
+    
+    public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        fbd.actualizarTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    }
 }

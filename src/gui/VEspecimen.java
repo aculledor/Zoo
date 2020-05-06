@@ -25,6 +25,7 @@ public class VEspecimen extends javax.swing.JDialog {
     public VEspecimen(java.awt.Frame parent, aplicacion.FachadaAplicacion fa, Especimen espe) {
         super(parent);
         this.fa = fa;
+        this.setResizable(false);
         initComponents();
         this.padre = (VPrincipal) parent; 
         
@@ -391,17 +392,19 @@ public class VEspecimen extends javax.swing.JDialog {
     }//GEN-LAST:event_botonNuevoActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        if(!fieldCuidador.getText().equals("")){
-            if(tablaTratamientos.getSelectedRow()==-1){
-                fa.nuevoTratamiento(especimen, fieldCuidador.getText(),fieldMedicacion.getText(), fieldFechaFin.getText());
-                mTablaTrat.setFilas(fa.consultarTratamientos(especimen));
-            }
-            else{
-                ModeloTablaEspecimenes mtu = (ModeloTablaEspecimenes) tablaTratamientos.getModel();
-                //fa.actualizarEspecimen();
-            }
-            fa.consultarTratamientos(especimen);
+        if(tablaTratamientos.getSelectedRow()==-1){
+            fa.nuevoTratamiento(especimen, fieldCuidador.getText(),fieldMedicacion.getText(), fieldFechaFin.getText());
+            mTablaTrat.setFilas(fa.consultarTratamientos(especimen));
         }
+        else{
+            fa.actualizarTratamiento(especimen, fieldCuidador.getText(),fieldMedicacion.getText(), fieldFechaInicio.getText(), fieldFechaFin.getText());
+            mTablaTrat.setFilas(fa.consultarTratamientos(especimen));
+        }
+        fa.consultarTratamientos(especimen);
+        fieldCuidador.setText("");
+        fieldMedicacion.setText("");
+        fieldFechaInicio.setText("");
+        fieldFechaFin.setText("");
     }//GEN-LAST:event_botonGuardarActionPerformed
 
 

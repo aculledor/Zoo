@@ -22,6 +22,7 @@ public class VEspecimenes extends javax.swing.JDialog {
      */
     public VEspecimenes(java.awt.Frame parent, aplicacion.FachadaAplicacion fa) {
         super(parent);
+        this.setResizable(false);
         this.fa = fa;
         initComponents();
         this.padre = (VPrincipal) parent; 
