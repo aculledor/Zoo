@@ -6,7 +6,6 @@
 package baseDatos;
 
 import aplicacion.Especie;
-import aplicacion.Especimen;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
