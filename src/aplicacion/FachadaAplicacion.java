@@ -114,8 +114,8 @@ public class FachadaAplicacion {
         return ce.consultarTratamientos(espe);
     }
     
-    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
-        ce.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
+        ce.nuevoTratamiento(espe, cuidador, medicamentos, fechafin);
     }
     
     ///////////////////////////////////////////////////////

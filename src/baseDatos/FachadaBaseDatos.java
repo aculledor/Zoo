@@ -131,8 +131,8 @@ public class FachadaBaseDatos {
         return daoEspec.consultarTratamientos(espe);
     }
     
-    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
-        daoEspec.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
+        daoEspec.nuevoTratamiento(espe, cuidador, medicamentos, fechafin);
     }
 
     // NOSU

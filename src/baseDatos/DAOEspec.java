@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  *
@@ -512,21 +514,23 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
-    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
         Connection con;
         PreparedStatement stmUsuario=null;
         String consulta;
+        LocalDate todayLocalDate = LocalDate.now( ZoneId.of( "Europe/Madrid" ) );
+        java.sql.Date sqlDateFin = java.sql.Date.valueOf(fechafin); 
         
         con=this.getConexion();
-        if(fechafin.equals("")){
+        if(!fechafin.equals("") && todayLocalDate.isBefore(sqlDateFin.toLocalDate())){
             consulta = "insert into tratar " + 
-                          "(especimenea, especimennum, cuidadorid, medicamentos, fechainicio) " +
+                          "(especimenea, especimennum, cuidadorid, medicamentos, fechafin) " +
                           "values (?,?,?,?,?)";
         }
         else{
-            consulta = "insert into especimenes " + 
-                          "(especimenea, especimennum, cuidadorid, medicamentos, fechainicio, fechafin) " +
-                          "values (?,?,?,?,?,?)";
+            consulta = "insert into tratar " + 
+                          "(especimenea, especimennum, cuidadorid, medicamentos) " +
+                          "values (?,?,?,?)";
         }
         try  {
             stmUsuario=con.prepareStatement(consulta);
@@ -535,9 +539,9 @@ public class DAOEspec extends AbstractDAO {
             stmUsuario.setInt(2, espe.getIdentificador());
             stmUsuario.setString(3, cuidador);
             stmUsuario.setString(4, medicamentos);
-            stmUsuario.setString(5, fechainicio);
-            if(!fechafin.equals(""))
-                stmUsuario.setString(6, fechafin);
+            if(!fechafin.equals("") && todayLocalDate.isBefore(sqlDateFin.toLocalDate())){
+                stmUsuario.setDate(5, sqlDateFin);
+            }
             
             stmUsuario.executeUpdate();
 

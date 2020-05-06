@@ -78,7 +78,7 @@ public class GestionEspecimenes {
         return fbd.consultarTratamientos(espe);
     }
     
-    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
-        fbd.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
+        fbd.nuevoTratamiento(espe, cuidador, medicamentos, fechafin);
     }
 }
