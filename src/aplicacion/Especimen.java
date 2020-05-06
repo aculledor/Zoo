@@ -15,12 +15,14 @@ public class Especimen {
     private String especie;
     private String habitat;
     private String veterinario;
+    private String historialMedico;
 
-    public Especimen(int numero, String especie, String habitat, String veterinario) {
+    public Especimen(int numero, String especie, String habitat, String veterinario, String historialMedico) {
         this.numero = numero;
         this.especie = especie;
         this.habitat = habitat;
         this.veterinario = veterinario;
+        this.historialMedico = historialMedico;
     }
 
     public int getIdentificador() {
@@ -53,6 +55,14 @@ public class Especimen {
 
     public void setVeterinario(String veterinario) {
         this.veterinario = veterinario;
+    }
+
+    public String getHistorialMedico() {
+        return historialMedico;
+    }
+
+    public void setHistorialMedico(String historialMedico) {
+        this.historialMedico = historialMedico;
     }
     
     

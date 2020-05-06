@@ -43,8 +43,8 @@ public class FachadaGui {
         va.setVisible(true);
     }
 
-    public void visualizarDetallesEspecimen(VPrincipal padre){
-        this.vdetesp = new VEspecimen(padre, fa);
+    public void visualizarDetallesEspecimen(VPrincipal padre,Especimen espe){
+        this.vdetesp = new VEspecimen(padre, fa, espe);
         vdetesp.setVisible(true);
     }
 }

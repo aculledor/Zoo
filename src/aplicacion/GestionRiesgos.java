@@ -36,8 +36,6 @@ public class GestionRiesgos {
             
         } catch(SQLException e){
             
-            System.out.println(e.getMessage());
-            
             try{
                 
                 fbd.modificarRiesgo(riesgo);

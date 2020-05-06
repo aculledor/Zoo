@@ -36,8 +36,6 @@ public class GestionProtocolos {
             
         } catch(SQLException e){
             
-            System.out.println(e.getMessage());
-            
             try{
                 
                 fbd.modificarProtocolo(protocolo);

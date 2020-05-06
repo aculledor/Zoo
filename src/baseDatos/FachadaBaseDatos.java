@@ -9,6 +9,7 @@ import aplicacion.Especimen;
 import aplicacion.HabilidadMagica;
 import aplicacion.Protocolo;
 import aplicacion.Riesgo;
+import aplicacion.Tratamiento;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -79,6 +80,28 @@ public class FachadaBaseDatos {
         return daoEspec.obtenerEspecimenes(id,especie,habitat,enTratamiento);
     }
     
+// HEAD
+    
+    public void borrarEspecimen(int id, String especie){
+        daoEspec.borrarEspecimen(id,especie);
+    }
+    
+    public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
+        daoEspec.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
+    
+    public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
+        return daoEspec.consultarCompHabitat(espe);
+    }
+    
+    public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
+        return daoEspec.consultarTratamientos(espe);
+    }
+    
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        daoEspec.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    }
+
     // NOSU
     
     public java.util.List<Especie> consultarEspecies(){

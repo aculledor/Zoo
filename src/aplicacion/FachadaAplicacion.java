@@ -62,8 +62,28 @@ public class FachadaAplicacion {
         return ce.obtenerEspecimenes(id,especie,habitat,enTratamiento);
     }
     
-    public void visualizarDetallesEspecimen(VPrincipal padre){
-        fgui.visualizarDetallesEspecimen(padre);
+    public void visualizarDetallesEspecimen(VPrincipal padre, Especimen espe){
+        fgui.visualizarDetallesEspecimen(padre,espe);
+    }
+    
+    public void borrarEspecimen(int id, String especie){
+        ce.borrarEspecimen(id,especie);
+    }
+    
+    public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
+        ce.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
+    
+    public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
+        return ce.consultarCompHabitat(espe);
+    }
+    
+    public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
+        return ce.consultarTratamientos(espe);
+    }
+    
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        ce.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
     }
     
     public void guardarEspecie(Especie especie){
