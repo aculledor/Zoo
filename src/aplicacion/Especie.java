@@ -14,14 +14,16 @@ public class Especie {
     private String nombre;
     private int espVida;
     private String descAnat;
+    private String comonPat;
     private int peligrosidad;
     private String descComp;
     private String dieta;
 
-    public Especie(String nombre, int espVida, String descAnat, int peligrosidad, String descComp, String dieta) {
+    public Especie(String nombre, int espVida, String descAnat, String comonPat, int peligrosidad, String descComp, String dieta) {
         this.nombre = nombre;
         this.espVida = espVida;
         this.descAnat = descAnat;
+        this.comonPat = comonPat;
         this.peligrosidad = peligrosidad;
         this.descComp = descComp;
         this.dieta = dieta;
@@ -45,6 +47,14 @@ public class Especie {
 
     public String getDescAnat() {
         return descAnat;
+    }
+
+    public void setComonPat(String comonPat) {
+        this.comonPat = comonPat;
+    }
+
+    public String getComonPat() {
+        return comonPat;
     }
 
     public void setDescAnat(String descAnat) {
