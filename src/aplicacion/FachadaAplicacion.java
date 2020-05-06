@@ -74,6 +74,26 @@ public class FachadaAplicacion {
         ce.nuevoEspecimen(id,especie,habitat,veterinario);
     }
     
+    public int aforoMaximo(String habitat){
+        return ce.aforoMaximo(habitat);
+    }
+    
+    public int recuperarOcupacion(String habitat){
+        return ce.recuperarOcupacion(habitat);
+    }
+    
+    public boolean puedeContener(String especie, String habitat){
+        return ce.puedeContener(especie, habitat);
+    }
+    
+    public boolean isMonoespecie(String habitat){
+        return ce.isMonoespecie(habitat);
+    }
+    
+    public boolean compararEspecies(String especie,String habitat){
+        return ce.compararEspecies(especie,habitat);
+    }
+    
     public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
         ce.actualizarEspecimen(idAntiguo, idNuevo,especie,habitat,veterinario);
     }

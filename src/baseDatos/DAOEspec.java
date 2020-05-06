@@ -6,6 +6,7 @@
 package baseDatos;
 
 import aplicacion.Especimen;
+import aplicacion.Habitat;
 import aplicacion.Tratamiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -162,6 +163,177 @@ public class DAOEspec extends AbstractDAO {
         }finally{
           try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
+    }
+    
+    public int aforoMaximo(String habitat){
+        int resultado=0;
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select aforo "
+                    + "from habitats "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getInt("aforo");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public int recuperarOcupacion(String habitat){
+        int resultado=0;
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select count(*) as ocupacion "
+                    + "from especimenes "
+                    + "where habitates like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getInt("ocupacion");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public boolean puedeContener(String especie, String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select especiepd "
+                    + "from podercontener "
+                    + "where habitatpd like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("especiepd");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado.contains(especie);
+    }
+    
+    public boolean isMonoespecie(String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select tipohabitat "
+                    + "from habitats "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("tipohabitat");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado.equalsIgnoreCase("Monoespecie");
+    }
+   
+    public boolean compararEspecies(String especie,String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select especie "
+                    + "from especimenes "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("especie");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado.equalsIgnoreCase(especie);
+        
     }
     
     public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){

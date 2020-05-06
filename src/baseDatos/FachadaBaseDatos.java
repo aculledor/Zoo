@@ -7,6 +7,7 @@ package baseDatos;
 import aplicacion.Especie;
 import aplicacion.Especimen;
 import aplicacion.HabilidadMagica;
+import aplicacion.Habitat;
 import aplicacion.Protocolo;
 import aplicacion.Riesgo;
 import aplicacion.Tratamiento;
@@ -88,6 +89,26 @@ public class FachadaBaseDatos {
     
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         daoEspec.nuevoEspecimen(id,especie,habitat,veterinario);
+    }
+    
+    public int aforoMaximo(String habitat){
+        return daoEspec.aforoMaximo(habitat);
+    }
+    
+    public int recuperarOcupacion(String habitat){
+        return daoEspec.recuperarOcupacion(habitat);
+    }
+    
+    public boolean puedeContener(String especie, String habitat){
+        return daoEspec.puedeContener(especie, habitat);
+    }
+    
+    public boolean isMonoespecie(String habitat){
+        return daoEspec.isMonoespecie(habitat);
+    }
+    
+    public boolean compararEspecies(String especie,String habitat){
+        return daoEspec.compararEspecies(especie,habitat);
     }
     
     public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){

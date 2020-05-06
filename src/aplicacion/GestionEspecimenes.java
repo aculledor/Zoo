@@ -38,6 +38,26 @@ public class GestionEspecimenes {
         fbd.nuevoEspecimen(id,especie,habitat,veterinario);
     }
     
+    public int aforoMaximo(String habitat){
+        return fbd.aforoMaximo(habitat);
+    }
+    
+    public int recuperarOcupacion(String habitat){
+        return fbd.recuperarOcupacion(habitat);
+    }
+    
+    public boolean puedeContener(String especie, String habitat){
+        return fbd.puedeContener(especie, habitat);
+    }
+    
+    public boolean isMonoespecie(String habitat){
+        return fbd.isMonoespecie(habitat);
+    }
+    
+    public boolean compararEspecies(String especie,String habitat){
+        return fbd.compararEspecies(especie,habitat);
+    }
+    
     public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
         fbd.actualizarEspecimen(idAntiguo, idNuevo, especie ,habitat, veterinario);
     }
