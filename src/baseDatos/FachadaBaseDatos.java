@@ -184,5 +184,21 @@ public class FachadaBaseDatos {
         return daoProtoc.obteneProtocolos(id, descripcion, equipamiento);
     }
     
+    public java.util.List<String> getListaAsoc(String nombre){
+        return daoHabMag.getListaAsoc(nombre);
+    }
+    
+    public java.util.List<String> getListaDes(String nombre){
+        return daoHabMag.getListaDes(nombre);
+    }
+    
+    public java.util.List<Riesgo> getListaRiesgos(String especie){
+        return daoRiesg.getListaRiesgos(especie);
+    }
+    
+    public java.util.List<Protocolo> getListaProtocolos(String riesgo){
+        return daoProtoc.getListaProtocolos(riesgo);
+    }
+    
     
 }

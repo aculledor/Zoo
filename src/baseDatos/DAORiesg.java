@@ -200,4 +200,46 @@ public class DAORiesg extends AbstractDAO {
         return resultado;
     }
     
+    public java.util.List<Riesgo> getListaRiesgos(String habilidad){
+        
+        java.util.List<Riesgo> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmPresentar = null;
+        ResultSet rsPresentar;
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select designacionri, tratamiento "
+                            + " from riesgos as ri "
+                            + " where ri.designacionri in( "
+                                + " select designacionr "
+                                + " from presentar as pr "
+                                + " where pr.nombrepm1 like ? ) "
+                    ;
+            
+            stmPresentar = con.prepareStatement(consulta);
+            stmPresentar.setString(1, "%"+habilidad+"%");
+            rsPresentar = stmPresentar.executeQuery();
+            
+            while (rsPresentar.next()) {
+                resultado.add(new Riesgo(rsPresentar.getString("designacionri"),
+                                         rsPresentar.getString("tratamiento")));
+            }
+ 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmPresentar.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        
+        return resultado;
+    }
+    
 }

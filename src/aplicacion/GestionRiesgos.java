@@ -57,4 +57,8 @@ public class GestionRiesgos {
         return fbd.obteneRiesgos(tipo, tratamiento);
     }
     
+    public java.util.List<Riesgo> getListaRiesgos(String especie){
+        return fbd.getListaRiesgos(especie);
+    }
+    
 }

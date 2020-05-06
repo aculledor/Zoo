@@ -5,18 +5,73 @@
  */
 package gui;
 
+import aplicacion.FachadaAplicacion;
+
 /**
  *
  * @author acull
  */
 public class VDatosEspecie extends javax.swing.JDialog {
-
+    private VPrincipal padre;
+    private FachadaAplicacion fa;
+    private ModeloTablaRiesgos mTablaRiesgos;
+    private ModeloTablaProtocolos mTablaProtocolos;
+    private ModeloListaStrings mListaAsoc;
+    private ModeloListaStrings mListaDes;
+    private String especie;
+    private java.util.List<String> habilidadesDes;
+    private java.util.List<String> habilidadesAsoc;
+    
+    
     /**
-     * Creates new form VDatosEspecie
+     * Creates new form VEspecimenes
      */
-    public VDatosEspecie(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public VDatosEspecie(java.awt.Frame parent, aplicacion.FachadaAplicacion fa, String especie) {
+        super(parent);
+        this.fa = fa;
         initComponents();
+        this.padre = (VPrincipal) parent;
+        this.especie = especie;
+        habilidadesDes = new java.util.ArrayList<>();
+        habilidadesAsoc = new java.util.ArrayList<>();
+        
+        //Nombre de la especie
+        labNombre.setText(this.especie);
+        
+        //Riesgos
+        mTablaRiesgos = new ModeloTablaRiesgos();
+        tablaRiesgos.setModel(mTablaRiesgos);
+        
+        //Protocolos
+        mTablaProtocolos = new ModeloTablaProtocolos();
+        tablaProto.setModel(mTablaProtocolos);
+        
+        //Habilidades que tiene
+        mListaAsoc = new ModeloListaStrings();
+        lstAsoc.setModel(mListaAsoc);
+        mListaAsoc.setElementos(this.fa.getListaAsoc(this.especie));
+        if (mListaAsoc.getSize() > 0) {
+            lstAsoc.setSelectedIndex(0);
+            desasociarB.setEnabled(true);
+            
+            mTablaRiesgos.setFilas(this.fa.getListaRiesgos(mListaAsoc.getElementAt(0)));
+            if (mTablaRiesgos.getRowCount()> 0) {
+                mTablaProtocolos.setFilas(this.fa.getListaProtocolos(mTablaRiesgos.getValueAt(0, 0).toString()));
+            }
+        } else {
+            desasociarB.setEnabled(false);
+        }
+
+        //Habilidades que NO tiene
+        mListaDes= new ModeloListaStrings();
+        lstDes.setModel(mListaDes);
+        mListaDes.setElementos(this.fa.getListaDes(this.especie));
+        if (mListaDes.getSize() > 0) {
+            lstDes.setSelectedIndex(0);
+            asociarB.setEnabled(true);
+        } else {
+            asociarB.setEnabled(false);
+        }
     }
 
     /**
@@ -29,48 +84,48 @@ public class VDatosEspecie extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labNombre = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lstAsoc = new javax.swing.JList<>();
         jPanel4 = new javax.swing.JPanel();
+        desasociarB = new javax.swing.JButton();
+        asociarB = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        lstDes = new javax.swing.JList<>();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tablaRiesgos = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tablaProto = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        actualizarB = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("NOMBRE ESPECIE");
+        labNombre.setText("NOMBRE ESPECIE");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel2.setText("Propiedades Mágicas que posee");
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        lstAsoc.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        lstAsoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstAsocMouseClicked(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
+        jScrollPane5.setViewportView(lstAsoc);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -78,9 +133,12 @@ public class VDatosEspecie extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel2)
+                .addGap(274, 274, 274))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,51 +146,69 @@ public class VDatosEspecie extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        desasociarB.setText("des");
+        desasociarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desasociarBActionPerformed(evt);
+            }
+        });
+
+        asociarB.setText("asoc");
+        asociarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asociarBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(desasociarB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(asociarB, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(desasociarB)
+                .addGap(34, 34, 34)
+                .addComponent(asociarB)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel3.setText("Propiedades Mágicas que no posee");
 
-        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        lstDes.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        lstDes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstDesMouseClicked(evt);
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        });
+        jScrollPane6.setViewportView(lstDes);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -141,26 +217,21 @@ public class VDatosEspecie extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane6)
                 .addContainerGap())
         );
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Riesgos");
 
-        jTable3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        tablaRiesgos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tablaRiesgos.setModel(new ModeloTablaRiesgos());
+        tablaRiesgos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaRiesgosMouseClicked(evt);
             }
-        ));
-        jScrollPane3.setViewportView(jTable3);
+        });
+        jScrollPane3.setViewportView(tablaRiesgos);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -181,26 +252,16 @@ public class VDatosEspecie extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Protocolos");
 
-        jTable4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable4);
+        tablaProto.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tablaProto.setModel(new ModeloTablaProtocolos());
+        jScrollPane4.setViewportView(tablaProto);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -221,7 +282,7 @@ public class VDatosEspecie extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -232,19 +293,23 @@ public class VDatosEspecie extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(labNombre)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(labNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -252,32 +317,40 @@ public class VDatosEspecie extends javax.swing.JDialog {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton2.setText("ACTUALIZAR");
+        actualizarB.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        actualizarB.setText("ACTUALIZAR");
+        actualizarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(594, Short.MAX_VALUE))
+                .addComponent(actualizarB, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(583, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(actualizarB, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -299,19 +372,106 @@ public class VDatosEspecie extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void desasociarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desasociarBActionPerformed
+        // TODO add your handling code here:
+        ModeloListaStrings mRC;
+        ModeloListaStrings mC;
+
+        mRC = (ModeloListaStrings) lstDes.getModel();
+        mC = (ModeloListaStrings) lstAsoc.getModel();
+        mRC.nuevoElemento(mC.getElementAt(lstAsoc.getSelectedIndex()));
+        habilidadesDes.add(mC.getElementAt(lstAsoc.getSelectedIndex()));
+        mC.borrarElemento(lstAsoc.getSelectedIndex());
+        if (mC.getSize() == 0) {
+            desasociarB.setEnabled(false);
+        } else {
+            lstAsoc.setSelectedIndex(0);
+        }
+        lstDes.setSelectedIndex(mRC.getSize() - 1);
+        asociarB.setEnabled(true);
+    }//GEN-LAST:event_desasociarBActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        fa.actualizarEspecie(especie, habilidadesAsoc, habilidadesDes);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void asociarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarBActionPerformed
+        // TODO add your handling code here:
+        ModeloListaStrings mRC;
+        ModeloListaStrings mC;
+
+        mRC = (ModeloListaStrings) lstDes.getModel();
+        mC = (ModeloListaStrings) lstAsoc.getModel();
+        mC.nuevoElemento(mRC.getElementAt(lstDes.getSelectedIndex()));
+        mRC.borrarElemento(lstDes.getSelectedIndex());
+        if (mRC.getSize() == 0) {
+            asociarB.setEnabled(false);
+        } else {
+            lstDes.setSelectedIndex(0);
+        }
+        lstAsoc.setSelectedIndex(mC.getSize() - 1);
+        desasociarB.setEnabled(true);
+    }//GEN-LAST:event_asociarBActionPerformed
+
+    private void actualizarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarBActionPerformed
+        // TODO add your handling code here:
+        fa.actualizarEspecie(especie, habilidadesAsoc, habilidadesDes);
+        
+        mListaAsoc.setElementos(this.fa.getListaAsoc(this.especie));
+        mListaDes.setElementos(this.fa.getListaDes(this.especie));
+        if (mListaAsoc.getSize() > 0) {
+            lstAsoc.setSelectedIndex(0);
+            desasociarB.setEnabled(true);
+            
+            mTablaRiesgos.setFilas(this.fa.getListaRiesgos(mListaAsoc.getElementAt(0)));
+            if (mTablaRiesgos.getRowCount()> 0) {
+                mTablaProtocolos.setFilas(this.fa.getListaProtocolos(mTablaRiesgos.getValueAt(0, 0).toString()));
+            }
+        }
+    }//GEN-LAST:event_actualizarBActionPerformed
+
+    private void lstAsocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAsocMouseClicked
+        // TODO add your handling code here:
+        if (mListaAsoc.getSize() > 0) {
+            mTablaRiesgos.setFilas(this.fa.getListaRiesgos(mListaAsoc.getElementAt(lstAsoc.getSelectedIndex())));
+            if (mTablaRiesgos.getRowCount()> 0) {
+                mTablaProtocolos.setFilas(this.fa.getListaProtocolos(mTablaRiesgos.getValueAt(0, 0).toString()));
+            }
+        }
+    }//GEN-LAST:event_lstAsocMouseClicked
+
+    private void tablaRiesgosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRiesgosMouseClicked
+        // TODO add your handling code here:
+        if (mTablaRiesgos.getRowCount()> 0 && tablaRiesgos.getSelectedRow()>0) {
+            mTablaProtocolos.setFilas(this.fa.getListaProtocolos(mTablaRiesgos.getValueAt(tablaRiesgos.getSelectedRow(), 0).toString()));
+        }
+    }//GEN-LAST:event_tablaRiesgosMouseClicked
+
+    private void lstDesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstDesMouseClicked
+        // TODO add your handling code here:
+        if (mListaDes.getSize() > 0 ) {
+            mTablaRiesgos.setFilas(this.fa.getListaRiesgos(mListaDes.getElementAt(lstDes.getSelectedIndex())));
+            if (mTablaRiesgos.getRowCount()> 0) {
+                mTablaProtocolos.setFilas(this.fa.getListaProtocolos(mTablaRiesgos.getValueAt(0, 0).toString()));
+            }
+        }
+    }//GEN-LAST:event_lstDesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton actualizarB;
+    private javax.swing.JButton asociarB;
+    private javax.swing.JButton desasociarB;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -323,13 +483,14 @@ public class VDatosEspecie extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JLabel labNombre;
+    private javax.swing.JList<String> lstAsoc;
+    private javax.swing.JList<String> lstDes;
+    private javax.swing.JTable tablaProto;
+    private javax.swing.JTable tablaRiesgos;
     // End of variables declaration//GEN-END:variables
 }

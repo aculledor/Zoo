@@ -240,10 +240,6 @@ public class VEspecies extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jPanel6 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -260,6 +256,10 @@ public class VEspecies extends javax.swing.JDialog {
         jTextField6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
@@ -332,20 +332,28 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jTextField16.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField16.setText("jTextField16");
 
+        jTextField17.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField17.setText("jTextField17");
 
+        jTextField18.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField18.setText("jTextField18");
 
+        jTextField19.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField19.setText("jTextField19");
 
+        jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel16.setText("Nombre");
 
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel17.setText("Esperanza de Vida");
 
+        jLabel18.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel18.setText("Nivel de Peligro");
 
+        jLabel19.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel19.setText("Dieta");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -395,6 +403,7 @@ public class VEspecies extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -418,79 +427,54 @@ public class VEspecies extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("GARDAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("NOVO");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("BORRAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
+        jButton5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton5.setText("Propiedades Mágicas, Riesgos y Protocolos");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel1.setText("Nombre");
 
+        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField1.setText("jTextField1");
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel2.setText("Esperanza de Vida");
 
+        jTextField2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField2.setText("jTextField2");
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel3.setText("Nivel de Peligro");
 
+        jTextField3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField3.setText("jTextField3");
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel4.setText("Descripcion Anatomia");
 
+        jTextField4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField4.setText("jTextField4");
 
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel5.setText("Descripcion Comportamiento");
 
+        jTextField5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField5.setText("jTextField5");
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel6.setText("Patalogias Comunes");
 
+        jTextField6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField6.setText("jTextField6");
 
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel7.setText("Dieta");
 
+        jTextField7.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField7.setText("jTextField7");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -523,7 +507,7 @@ public class VEspecies extends javax.swing.JDialog {
                             .addComponent(jLabel6)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -563,16 +547,65 @@ public class VEspecies extends javax.swing.JDialog {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton2.setText("GARDAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton3.setText("NOVO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton4.setText("BORRAR");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -583,13 +616,14 @@ public class VEspecies extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Especies", jPanel1);
 
+        jButton6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton6.setText("BUSCAR");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -597,16 +631,22 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jTextField20.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField20.setText("jTextField20");
 
+        jTextField21.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField21.setText("jTextField21");
 
+        jTextField22.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField22.setText("jTextField22");
 
+        jLabel20.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel20.setText("Nombre");
 
+        jLabel21.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel21.setText("Efectos");
 
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel22.setText("Aplicaciones");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -626,7 +666,7 @@ public class VEspecies extends javax.swing.JDialog {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22)
                     .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -649,6 +689,7 @@ public class VEspecies extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -672,6 +713,7 @@ public class VEspecies extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(jTable2);
 
+        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton7.setText("GARDAR");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -679,6 +721,7 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jButton8.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton8.setText("NOVO");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -686,6 +729,7 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jButton9.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton9.setText("BORRAR");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -699,11 +743,11 @@ public class VEspecies extends javax.swing.JDialog {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -711,22 +755,33 @@ public class VEspecies extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel8.setText("Nombre");
 
+        jTextField8.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField8.setText("jTextField8");
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
 
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel9.setText("Efectos");
 
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel10.setText("Posibles Aplicaciones");
 
+        jTextField9.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField9.setText("jTextField9");
 
+        jTextField10.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField10.setText("jTextField10");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -736,35 +791,32 @@ public class VEspecies extends javax.swing.JDialog {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -783,13 +835,14 @@ public class VEspecies extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Propiedades Mágicas", jPanel2);
 
+        jButton10.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton10.setText("BUSCAR");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -797,12 +850,16 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jTextField23.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField23.setText("jTextField23");
 
+        jTextField24.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField24.setText("jTextField24");
 
+        jLabel23.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel23.setText("Tipo");
 
+        jLabel24.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel24.setText("Tratamiento");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -840,6 +897,7 @@ public class VEspecies extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jTable3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -863,6 +921,7 @@ public class VEspecies extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(jTable3);
 
+        jButton11.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton11.setText("GARDAR");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -870,6 +929,7 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jButton12.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton12.setText("BORRAR");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -877,6 +937,7 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jButton13.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton13.setText("NOVO");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -902,19 +963,28 @@ public class VEspecies extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                     .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel11.setText("Tipo");
 
+        jTextField11.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField11.setText("jTextField11");
 
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel12.setText("Tratamiento");
 
+        jTextField12.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField12.setText("jTextField12");
+        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField12ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -942,16 +1012,17 @@ public class VEspecies extends javax.swing.JDialog {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(62, 62, 62)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Riesgos", jPanel3);
 
+        jButton14.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton14.setText("BUSCAR");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -959,16 +1030,22 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jTextField25.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField25.setText("jTextField25");
 
+        jLabel25.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel25.setText("Código ID");
 
+        jLabel26.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel26.setText("Palabra clave");
 
+        jTextField26.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField26.setText("jTextField26");
 
+        jTextField27.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField27.setText("jTextField27");
 
+        jLabel27.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel27.setText("Equipamiento");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -1012,6 +1089,7 @@ public class VEspecies extends javax.swing.JDialog {
                 .addGap(24, 24, 24))
         );
 
+        jTable4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1035,6 +1113,7 @@ public class VEspecies extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(jTable4);
 
+        jButton15.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton15.setText("GARDAR");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1042,6 +1121,7 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jButton16.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton16.setText("NOVO");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1049,6 +1129,7 @@ public class VEspecies extends javax.swing.JDialog {
             }
         });
 
+        jButton17.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton17.setText("BORRAR");
         jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1074,22 +1155,28 @@ public class VEspecies extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                     .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel13.setText("Id");
 
+        jTextField13.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField13.setText("jTextField13");
 
+        jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel14.setText("Descripcion");
 
+        jTextField14.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField14.setText("jTextField14");
 
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jLabel15.setText("Equipamiento");
 
+        jTextField15.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jTextField15.setText("jTextField15");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -1118,13 +1205,13 @@ public class VEspecies extends javax.swing.JDialog {
                     .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1144,8 +1231,8 @@ public class VEspecies extends javax.swing.JDialog {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Protocolos", jPanel4);
@@ -1158,58 +1245,11 @@ public class VEspecies extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
-        mostrarDatosEspecie();
-    }//GEN-LAST:event_jTable1KeyReleased
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        mostrarDatosEspecie();
-    }//GEN-LAST:event_jTable1MouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here: BOTON GARDAR ESPECIE
-        
-        Especie especie = new Especie(jTextField1.getText(),
-                                      Integer.valueOf(jTextField2.getText()),
-                                      jTextField4.getText(),
-                                      jTextField6.getText(),
-                                      Integer.valueOf(jTextField3.getText()),
-                                      jTextField5.getText(),
-                                      jTextField7.getText());
-        
-        fa.guardarEspecie(especie);
-        
-        actualizarTablaEspecies();
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here: BOTON BORRAR ESPECIE
-        
-        fa.borrarEspecie(jTextField1.getText());
-        
-        actualizarTablaEspecies();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here: BOTON NOVO ESPECIE
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-        jTextField7.setText("");
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here: BOTON GARDAR HABILIDAD MAGICA
@@ -1319,16 +1359,6 @@ public class VEspecies extends javax.swing.JDialog {
         mostrarDatosProtocolo();
     }//GEN-LAST:event_jTable4KeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here: BOTON BUSCAR ESPECIES
-        
-        mTablaEspecies.setFilas(fa.obtenerEspecies(
-                jTextField16.getText(),
-                (jTextField17.getText().isEmpty())?null:Integer.valueOf(jTextField17.getText()),
-                (jTextField18.getText().isEmpty())?null:Integer.valueOf(jTextField18.getText()),
-                jTextField19.getText()));
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here: BOTON BUSCAR HABILIDADES MAGICAS
         
@@ -1352,6 +1382,73 @@ public class VEspecies extends javax.swing.JDialog {
         jTextField25.getText(),jTextField26.getText(),jTextField27.getText()));
         
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here: BOTON BORRAR ESPECIE
+
+        fa.borrarEspecie(jTextField1.getText());
+
+        actualizarTablaEspecies();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here: BOTON NOVO ESPECIE
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here: BOTON GARDAR ESPECIE
+
+        Especie especie = new Especie(jTextField1.getText(),
+            Integer.valueOf(jTextField2.getText()),
+            jTextField4.getText(),
+            jTextField6.getText(),
+            Integer.valueOf(jTextField3.getText()),
+            jTextField5.getText(),
+            jTextField7.getText());
+
+        fa.guardarEspecie(especie);
+
+        actualizarTablaEspecies();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        mostrarDatosEspecie();
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        mostrarDatosEspecie();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here: BOTON BUSCAR ESPECIES
+
+        mTablaEspecies.setFilas(fa.obtenerEspecies(
+            jTextField16.getText(),
+            (jTextField17.getText().isEmpty())?null:Integer.valueOf(jTextField17.getText()),
+            (jTextField18.getText().isEmpty())?null:Integer.valueOf(jTextField18.getText()),
+            jTextField19.getText()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        fa.visualizarDatosEspecie(this.padre,jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
