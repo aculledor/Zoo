@@ -1,0 +1,88 @@
+INSERT INTO Protocolos (designacionPro, descripcionPro, equipamiento) 
+VALUES ('MT-101', 'Administrar calmantes de estómago al especímen', 'Protector estomacal');
+INSERT INTO Protocolos (designacionPro, descripcionPro, equipamiento) 
+VALUES ('GP-96', 'Vestir mascaras de gas homologadas', 'Máscaras homologadas');
+
+INSERT INTO Riesgos (designacionRi, tratamiento) VALUES ('Quemaduras Mágicas', 'Aplicar ungüento gnómico');
+INSERT INTO Riesgos (designacionRi, tratamiento) VALUES ('Hipnosis', 'Bofetada');
+
+insert into PropiedadesMagicas values('Vuelo','Movimiento o efecto a través del aire','Actividades de espionaje');
+insert into PropiedadesMagicas values('Ignifugidad','Resistencia al fuego y al calor','Labores de rescate');
+insert into PropiedadesMagicas values('Teletransporte','Mover objetos o partículas de un lugar a otro instantáneamente','Comunicación y desplazamiento inmediato');
+
+INSERT INTO EspeciesAnimales (nombreEA, esperanzaVida, descripcionAnatomica, patologiasComunes, comportamientoComun, dieta) 
+VALUES ('Dragon', 100, 'Dragon nórdico con 4 patas y 2 alas', 'Ardores de estomago', 'Usualmente agresivos', 'Carnívoro');
+INSERT INTO EspeciesAnimales (nombreEA, esperanzaVida, descripcionAnatomica, patologiasComunes, comportamientoComun, dieta) 
+VALUES ('Chupoptero', 3, 'Mosquito gigante', 'Anemia', 'Pacíficos y asustadizos', 'Omnívoro');
+
+INSERT INTO Implicar (protocolo, riesgo) VALUES ('MT-101', 'Quemaduras Mágicas');
+INSERT INTO Implicar (protocolo, riesgo) VALUES ('GP-96', 'Hipnosis');
+
+insert into Presentar values('Vuelo','Quemaduras Mágicas');
+insert into Presentar values('Teletransporte','Hipnosis');
+
+INSERT INTO Convivir values ('Dragon','Chupoptero');
+
+insert into Poseer values('Vuelo','Chupoptero');
+insert into Poseer values('Vuelo','Dragon');
+insert into Poseer values('Teletransporte','Dragon');
+
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('01', 'Juan', 'Martinez', 'Humano', 'Nula' ,'Temporal' ,'600');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('02', 'Laura', 'Trashorras', 'Humana', 'Nula' ,'Temporal' ,'650');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('03', 'Harry', 'Malco', 'Centauro', 'Innata' ,'Fijo' ,'6000');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('04', 'Gil', 'Dores', 'Arpía', 'Maga' ,'Fijo' ,'1200');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('05', 'Manuel', 'Casas', 'Lamia', 'Poca' ,'Temporal' ,'800');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('06', 'Jose', 'Suarez', 'Humano', 'Mago' ,'Temporal' ,'920');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('07', 'Albert', 'Ross', 'Vampiro', 'Innata' ,'Fijo' ,'666');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('08', 'Rosa', 'Grainjer', 'Humana', 'Nula' ,'Temporal' ,'673');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('09', 'Lira', 'Potter', 'Enana', 'Nula' ,'Fijo' ,'701');
+INSERT INTO Personal(dni, nombre, apellidos, raza, aptitudMagica, tipoContrato, sueldo) 
+VALUES ('10', 'Ana', 'Lopez', 'Goblin', 'Innata' ,'Fijo' ,'600');
+
+INSERT INTO AttCliente(dniAtt, idAtt) VALUES ('01', 'aaa');
+INSERT INTO AttCliente(dniAtt, idAtt) VALUES ('02', 'aab');
+
+INSERT INTO Cuidadores(dniCui, idCui) VALUES ('07', 'ccc');
+INSERT INTO Cuidadores(dniCui, idCui) VALUES ('08', 'ccb');
+
+INSERT INTO Veterinarios(dniVet, idVet) VALUES ('03', 'vvv');
+INSERT INTO Veterinarios(dniVet, idVet) VALUES ('04', 'vvb');
+
+INSERT INTO EquipoMantenimiento(desigMan, recursosMateriales) VALUES (11, 'Escobas voladoras y de barrer');
+
+INSERT INTO Mantenimiento(dniMan, idMan,equipo) VALUES ('05', 'mmm', 11);
+INSERT INTO Mantenimiento(dniMan, idMan,equipo) VALUES ('06', 'mmb', 11);
+
+INSERT INTO Habitats 
+VALUES (45, 100, 2, 'Limpiar bisemanalmente', 'Acceder con equipamiento innífugo', 'Contiene una cueva artificial', 
+'Vallas electrificadas', 'Monoespecie', 11);
+INSERT INTO Habitats 
+VALUES (32, 155, 20, 'Limpiar diariamente', 'Acceder con equipamiento anti-mosquitos', 'Contiene un bosque artificial', 
+'Enjaulado en su complitud', 'Monoespecie', 11);
+
+INSERT INTO PoderContener(habitatpd, especiepd) VALUES (45, 'Dragon');
+INSERT INTO PoderContener(habitatpd, especiepd) VALUES (32, 'Chupoptero');
+
+INSERT INTO Seguridad(dniSeg, idSeg, especializacion, habitatSeg)
+VALUES ('09', 'sss', 'Dragon', 45);
+INSERT INTO Seguridad(dniSeg, idSeg, especializacion, habitatSeg)
+VALUES ('10', 'ssb', 'Chupoptero', 32);
+
+INSERT INTO Especimenes VALUES (01, 'Sano', 'Chupoptero', 32);
+INSERT INTO Especimenes VALUES (02, 'Ala rota', 'Chupoptero', 32, 'vvv');
+INSERT INTO Especimenes VALUES (03, 'Sano', 'Chupoptero', 32);
+INSERT INTO Especimenes VALUES (04, 'Sano', 'Chupoptero', 32);
+INSERT INTO Especimenes VALUES (01, 'Sano', 'Dragon', 45);
+INSERT INTO Especimenes VALUES (02, 'Acatarrado', 'Dragon', 45, 'vvb');
+
+INSERT INTO Tratar VALUES ('Chupoptero', 02, 'ccc');
+INSERT INTO Tratar VALUES ('Dragon', 02, 'ccb');
