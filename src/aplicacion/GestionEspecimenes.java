@@ -45,4 +45,8 @@ public class GestionEspecimenes {
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
         return fbd.consultarTratamientos(espe);
     }
+    
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        fbd.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    }
 }

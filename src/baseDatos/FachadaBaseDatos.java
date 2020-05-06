@@ -83,4 +83,8 @@ public class FachadaBaseDatos {
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
         return daoEspec.consultarTratamientos(espe);
     }
+    
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        daoEspec.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    }
 }

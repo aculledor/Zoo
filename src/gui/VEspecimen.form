@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel8"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -99,9 +106,6 @@
                       <Border info="null"/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldNombreHabitatActionPerformed"/>
-                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jPanel4">
 
@@ -248,7 +252,7 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jPanel3" max="32767" attributes="0"/>
                               <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jScrollPane1" alignment="1" pref="773" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="1" pref="778" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -258,7 +262,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="348" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -281,6 +285,9 @@
                           <Connection code="new ModeloTablaTratamientos()" type="code"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaTratamientosMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -289,12 +296,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="778" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="131" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -304,15 +311,107 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="etiquetaFechaInicio" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etiquetaCuidador" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="fieldFechaInicio" pref="109" max="32767" attributes="0"/>
+                                  <Component id="fieldCuidador" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="etiquetaMedicacion" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etiquetaFechaFin" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="fieldMedicacion" pref="110" max="32767" attributes="0"/>
+                                  <Component id="fieldFechaFin" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="botonGuardar" min="-2" pref="81" max="-2" attributes="0"/>
+                                  <Component id="botonNuevo" min="-2" pref="81" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="128" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="etiquetaCuidador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldCuidador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etiquetaMedicacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldMedicacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="botonNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="41" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="etiquetaFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="fieldFechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="etiquetaFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="fieldFechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="botonGuardar" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JButton" name="botonNuevo">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Nuevo"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonNuevoActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="botonGuardar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Guardar"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGuardarActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="fieldCuidador">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="etiquetaCuidador">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Cuidador:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="etiquetaMedicacion">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Medicaci&#xf3;n:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="fieldMedicacion">
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="etiquetaFechaInicio">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Fecha Inicio:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="etiquetaFechaFin">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Fecha Fin:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="fieldFechaFin">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="fieldFechaInicio">
+                    </Component>
+                  </SubComponents>
                 </Container>
               </SubComponents>
             </Container>

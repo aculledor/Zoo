@@ -17,6 +17,7 @@ public class VEspecimen extends javax.swing.JDialog {
     private FachadaAplicacion fa;
     private ModeloTablaTratamientos mTablaTrat;
     private ModeloTablaEspecimenesReducido mTablaReduc;
+    private Especimen especimen;
     
     /**
      * Creates new form VEspecimenes
@@ -27,11 +28,13 @@ public class VEspecimen extends javax.swing.JDialog {
         initComponents();
         this.padre = (VPrincipal) parent; 
         
+        this.especimen=espe;
+        
         //Tabla tratamientos
         mTablaTrat = new ModeloTablaTratamientos();
         tablaTratamientos.setModel(mTablaTrat);
         
-        this.setTablaTrat(espe);
+        this.setTablaTrat();
         
         if(mTablaTrat.getRowCount()> 0){
             tablaTratamientos.setRowSelectionInterval(0, 0);
@@ -41,20 +44,20 @@ public class VEspecimen extends javax.swing.JDialog {
         mTablaReduc = new ModeloTablaEspecimenesReducido();
         tablaReduc.setModel(mTablaReduc);
         
-        this.setTablaReduc(espe);
-        this.fieldNombreHabitat.setText("Habitat "+espe.getHabitat());
+        this.setTablaReduc();
+        this.fieldNombreHabitat.setText("Habitat "+especimen.getHabitat());
         
         if(mTablaReduc.getRowCount()> 0){
             tablaReduc.setRowSelectionInterval(0, 0);
         }
     }
     
-    public final void setTablaTrat(Especimen espe){
-        mTablaTrat.setFilas(fa.consultarTratamientos(espe));
+    public final void setTablaTrat(){
+        mTablaTrat.setFilas(fa.consultarTratamientos(especimen));
     }
     
-    public final void setTablaReduc(Especimen espe){
-        mTablaReduc.setFilas(fa.consultarCompHabitat(espe));
+    public final void setTablaReduc(){
+        mTablaReduc.setFilas(fa.consultarCompHabitat(especimen));
     }
 
     /**
@@ -66,6 +69,7 @@ public class VEspecimen extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         vHabitat = new javax.swing.JPanel();
@@ -85,9 +89,21 @@ public class VEspecimen extends javax.swing.JDialog {
         tablaTratamientos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        botonNuevo = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
+        fieldCuidador = new javax.swing.JTextField();
+        etiquetaCuidador = new javax.swing.JLabel();
+        etiquetaMedicacion = new javax.swing.JLabel();
+        fieldMedicacion = new javax.swing.JTextField();
+        etiquetaFechaInicio = new javax.swing.JLabel();
+        etiquetaFechaFin = new javax.swing.JLabel();
+        fieldFechaFin = new javax.swing.JTextField();
+        fieldFechaInicio = new javax.swing.JTextField();
         vHistorial = new javax.swing.JPanel();
         textHistorial = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+
+        jLabel8.setText("jLabel8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,11 +112,6 @@ public class VEspecimen extends javax.swing.JDialog {
         fieldNombreHabitat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fieldNombreHabitat.setText("Nombre Habitat");
         fieldNombreHabitat.setBorder(null);
-        fieldNombreHabitat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNombreHabitatActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Compañeros de Hábitat");
@@ -185,28 +196,91 @@ public class VEspecimen extends javax.swing.JDialog {
         jTabbedPane1.addTab("Hábitat", vHabitat);
 
         tablaTratamientos.setModel(new ModeloTablaTratamientos());
+        tablaTratamientos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaTratamientosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaTratamientos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 778, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 131, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
+
+        botonNuevo.setText("Nuevo");
+        botonNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevoActionPerformed(evt);
+            }
+        });
+
+        botonGuardar.setText("Guardar");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
+
+        etiquetaCuidador.setText("Cuidador:");
+
+        etiquetaMedicacion.setText("Medicación:");
+
+        etiquetaFechaInicio.setText("Fecha Inicio:");
+
+        etiquetaFechaFin.setText("Fecha Fin:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(etiquetaFechaInicio)
+                    .addComponent(etiquetaCuidador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fieldFechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                    .addComponent(fieldCuidador))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(etiquetaMedicacion)
+                    .addComponent(etiquetaFechaFin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fieldMedicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addComponent(fieldFechaFin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 128, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaCuidador)
+                    .addComponent(fieldCuidador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etiquetaMedicacion)
+                    .addComponent(fieldMedicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonNuevo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(etiquetaFechaInicio)
+                        .addComponent(fieldFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(etiquetaFechaFin)
+                        .addComponent(fieldFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonGuardar))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout vDatosLayout = new javax.swing.GroupLayout(vDatos);
@@ -218,14 +292,14 @@ public class VEspecimen extends javax.swing.JDialog {
                 .addGroup(vDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE))
                 .addContainerGap())
         );
         vDatosLayout.setVerticalGroup(
             vDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -284,18 +358,61 @@ public class VEspecimen extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldNombreHabitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreHabitatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldNombreHabitatActionPerformed
+    private void tablaTratamientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTratamientosMouseClicked
+        ModeloTablaTratamientos m;
+        m=(ModeloTablaTratamientos) tablaTratamientos.getModel();
+       
+        fieldCuidador.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getCuidador());
+        fieldMedicacion.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getMedicamentos());
+        fieldFechaInicio.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getFechaInicio());
+        fieldFechaFin.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getFechaFin());
+    }//GEN-LAST:event_tablaTratamientosMouseClicked
+
+    private void botonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoActionPerformed
+        tablaTratamientos.clearSelection();
+        
+        //botonBorrar.setEnabled(false);
+        botonGuardar.setEnabled(true);
+
+        fieldCuidador.setText("");
+        fieldMedicacion.setText("");
+        fieldFechaInicio.setText("");
+        fieldFechaFin.setText("");
+    }//GEN-LAST:event_botonNuevoActionPerformed
+
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+        if(!fieldCuidador.getText().equals("") && !fieldMedicacion.getText().equals("") && !fieldFechaInicio.getText().equals("")){
+            if(tablaTratamientos.getSelectedRow()==-1){
+                fa.nuevoTratamiento(especimen, fieldCuidador.getText(),fieldMedicacion.getText(),fieldFechaInicio.getText(),
+                        fieldFechaFin.getText());
+            }
+            else{
+                ModeloTablaEspecimenes mtu = (ModeloTablaEspecimenes) tablaTratamientos.getModel();
+                //fa.actualizarEspecimen();
+            }
+            fa.consultarTratamientos(especimen);
+        }
+    }//GEN-LAST:event_botonGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonNuevo;
+    private javax.swing.JLabel etiquetaCuidador;
+    private javax.swing.JLabel etiquetaFechaFin;
+    private javax.swing.JLabel etiquetaFechaInicio;
+    private javax.swing.JLabel etiquetaMedicacion;
     private javax.swing.JTextArea fielDescripcionHabitat;
+    private javax.swing.JTextField fieldCuidador;
+    private javax.swing.JTextField fieldFechaFin;
+    private javax.swing.JTextField fieldFechaInicio;
     private javax.swing.JTextArea fieldInfraestrucHabitat;
+    private javax.swing.JTextField fieldMedicacion;
     private javax.swing.JTextField fieldNombreHabitat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

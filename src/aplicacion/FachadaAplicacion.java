@@ -64,4 +64,8 @@ public class FachadaAplicacion {
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
         return ce.consultarTratamientos(espe);
     }
+    
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        ce.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    }
 }
