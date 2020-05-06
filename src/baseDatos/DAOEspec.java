@@ -6,11 +6,14 @@
 package baseDatos;
 
 import aplicacion.Especimen;
+import aplicacion.Habitat;
 import aplicacion.Tratamiento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  *
@@ -34,7 +37,8 @@ public class DAOEspec extends AbstractDAO {
         try {
 
             String consulta = "select numero, especie, habitates, veterinarioid, historialmedico "
-                + "from especimenes";
+                + "from especimenes "
+                + "order by  especie, numero";
         
             stmCatalogo = con.prepareStatement(consulta);
             rsCatalogo = stmCatalogo.executeQuery();
@@ -55,7 +59,6 @@ public class DAOEspec extends AbstractDAO {
         }
         return resultado;
     }
-    
     
     public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento) {
         java.util.List<Especimen> resultado = new java.util.ArrayList<>();
@@ -128,7 +131,6 @@ public class DAOEspec extends AbstractDAO {
         }
     }
     
-    
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -164,6 +166,211 @@ public class DAOEspec extends AbstractDAO {
         }
     }
     
+    public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        
+        con=this.getConexion();
+        
+        String consulta = "update especimenes " + 
+                          "set numero = ?, "
+                        + "especie = ?, "
+                        + "habitates = ?, "
+                        + "veterinarioid = ? "
+                        + "where numero = ? "
+                        + "and especie like ? ";
+        try  {
+            stmUsuario=con.prepareStatement(consulta);
+            
+            stmUsuario.setInt(1, idNuevo);
+            stmUsuario.setString(2, especie);
+            stmUsuario.setString(3, habitat);
+            stmUsuario.setString(4, veterinario);
+            stmUsuario.setInt(5, idAntiguo);
+            //stmUsuario.setInt(5, especieAntigua);
+            
+            stmUsuario.executeUpdate();
+
+        } catch (SQLException e){
+          System.out.println(e.getMessage());
+          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }finally{
+          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    
+    public int aforoMaximo(String habitat){
+        int resultado=0;
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select aforo "
+                    + "from habitats "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getInt("aforo");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public int recuperarOcupacion(String habitat){
+        int resultado=0;
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select count(*) as ocupacion "
+                    + "from especimenes "
+                    + "where habitates like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getInt("ocupacion");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public boolean puedeContener(String especie, String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select especiepd "
+                    + "from podercontener "
+                    + "where habitatpd like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("especiepd");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado.contains(especie);
+    }
+    
+    public boolean isMonoespecie(String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select tipohabitat "
+                    + "from habitats "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("tipohabitat");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado.equalsIgnoreCase("Monoespecie");
+    }
+   
+    public boolean compararEspecies(String especie,String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select especie "
+                    + "from especimenes "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, "%"+habitat+"%");
+            rsCatalogo = stmCatalogo.executeQuery();
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("especie");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado.equalsIgnoreCase(especie);
+        
+    }
+    
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         java.util.List<Especimen> resultado = new java.util.ArrayList<>();
         Connection con;
@@ -176,10 +383,16 @@ public class DAOEspec extends AbstractDAO {
 
             String consulta = "select numero, especie, habitates, veterinarioid, historialmedico "
                     + "from especimenes "
-                    + "where habitates like ? ";
+                    + "where habitates like ? "
+                    + "and (numero, especie) != (select numero, especie "
+                    +                           "from especimenes "
+                    +                           "where numero = ? "
+                    +                           "and especie like ?) ";
         
             stmCatalogo = con.prepareStatement(consulta);
             stmCatalogo.setString(1, "%"+espe.getHabitat()+"%");
+            stmCatalogo.setInt(2, espe.getIdentificador());
+            stmCatalogo.setString(3, "%"+espe.getEspecie()+"%");
             rsCatalogo = stmCatalogo.executeQuery();
             while (rsCatalogo.next()) {
                 resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
@@ -199,6 +412,78 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    public String consultarDescHabitat(String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select desterreno "
+                    + "from habitats "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, habitat);
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("desterreno");
+            }
+            
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    public String consultarInfrHabitat(String habitat){
+        String resultado="";
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select infraestructuraspresentes "
+                    + "from habitats "
+                    + "where deshabitat like ? ";
+        
+            stmCatalogo = con.prepareStatement(consulta);
+            stmCatalogo.setString(1, habitat);
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            while (rsCatalogo.next()) {
+                resultado=rsCatalogo.getString("infraestructuraspresentes");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmCatalogo.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        return resultado;
+    }
+    
+    
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
         java.util.List<Tratamiento> resultado = new java.util.ArrayList<>();
         Connection con;
@@ -212,7 +497,8 @@ public class DAOEspec extends AbstractDAO {
             String consulta = "select cuidadorid, medicamentos, fechainicio, fechafin "
                     + "from tratar "
                     + "where especimennum = ? "
-                    + "and especimenea like ? ";
+                    + "and especimenea like ? "
+                    + "order by fechainicio ";
         
             stmCatalogo = con.prepareStatement(consulta);
             stmCatalogo.setInt(1, espe.getIdentificador());
@@ -236,21 +522,23 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
-    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
         Connection con;
         PreparedStatement stmUsuario=null;
         String consulta;
+        LocalDate todayLocalDate = LocalDate.now( ZoneId.of( "Europe/Madrid" ) );
+        java.sql.Date sqlDateFin = java.sql.Date.valueOf(fechafin); 
         
         con=this.getConexion();
-        if(fechafin.equals("")){
+        if(!fechafin.equals("") && !todayLocalDate.isAfter(sqlDateFin.toLocalDate())){
             consulta = "insert into tratar " + 
-                          "(especimenea, especimennum, cuidadorid, medicamentos, fechainicio) " +
+                          "(especimenea, especimennum, cuidadorid, medicamentos, fechafin) " +
                           "values (?,?,?,?,?)";
         }
         else{
-            consulta = "insert into especimenes " + 
-                          "(especimenea, especimennum, cuidadorid, medicamentos, fechainicio, fechafin) " +
-                          "values (?,?,?,?,?,?)";
+            consulta = "insert into tratar " + 
+                          "(especimenea, especimennum, cuidadorid, medicamentos) " +
+                          "values (?,?,?,?)";
         }
         try  {
             stmUsuario=con.prepareStatement(consulta);
@@ -259,9 +547,9 @@ public class DAOEspec extends AbstractDAO {
             stmUsuario.setInt(2, espe.getIdentificador());
             stmUsuario.setString(3, cuidador);
             stmUsuario.setString(4, medicamentos);
-            stmUsuario.setString(5, fechainicio);
-            if(!fechafin.equals(""))
-                stmUsuario.setString(6, fechafin);
+            if(!fechafin.equals("") && todayLocalDate.isBefore(sqlDateFin.toLocalDate())){
+                stmUsuario.setDate(5, sqlDateFin);
+            }
             
             stmUsuario.executeUpdate();
 
@@ -272,4 +560,70 @@ public class DAOEspec extends AbstractDAO {
           try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
     }
+    
+    public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        Connection con;
+        PreparedStatement stmUsuario=null;
+        java.sql.Date sqlDateInicio = java.sql.Date.valueOf(fechainicio); 
+        java.sql.Date sqlDateFin=null;
+        
+        if(!fechafin.equals("")){
+            sqlDateFin = java.sql.Date.valueOf(fechafin); 
+        }
+        
+        con=this.getConexion();
+        
+        String consulta = "update tratar " + 
+                          "set cuidadorid = ?, ";
+                
+        if(!fechafin.equals("") && !sqlDateInicio.toLocalDate().isAfter(sqlDateFin.toLocalDate())){
+            consulta += "fechafin = ?, "
+                        + "medicamentos = ? "
+                        + "where especimenea like ? "
+                        + "and especimennum = ? "
+                        + "and fechainicio = ? ";
+            try  {
+                stmUsuario=con.prepareStatement(consulta);
+
+                stmUsuario.setString(1, cuidador);
+                stmUsuario.setDate(2, sqlDateFin);
+                stmUsuario.setString(3, medicamentos);
+                stmUsuario.setString(4, espe.getEspecie());
+                stmUsuario.setInt(5, espe.getIdentificador());
+                stmUsuario.setDate(6, sqlDateInicio);
+
+                stmUsuario.executeUpdate();
+
+            } catch (SQLException e){
+              System.out.println(e.getMessage());
+              this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }finally{
+              try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            }
+        }
+        else{
+            consulta += "medicamentos = ? "
+                        + "where especimenea like ? "
+                        + "and especimennum = ? "
+                        + "and fechainicio = ? ";
+            try  {
+                stmUsuario=con.prepareStatement(consulta);
+
+                stmUsuario.setString(1, cuidador);
+                stmUsuario.setString(2, medicamentos);
+                stmUsuario.setString(3, espe.getEspecie());
+                stmUsuario.setInt(4, espe.getIdentificador());
+                stmUsuario.setDate(5, sqlDateInicio);
+
+                stmUsuario.executeUpdate();
+
+            } catch (SQLException e){
+              System.out.println(e.getMessage());
+              this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }finally{
+              try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            }
+        }
+    }
+
 }

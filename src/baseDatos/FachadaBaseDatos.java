@@ -7,6 +7,7 @@ package baseDatos;
 import aplicacion.Especie;
 import aplicacion.Especimen;
 import aplicacion.HabilidadMagica;
+import aplicacion.Habitat;
 import aplicacion.Protocolo;
 import aplicacion.Riesgo;
 import aplicacion.Tratamiento;
@@ -90,16 +91,52 @@ public class FachadaBaseDatos {
         daoEspec.nuevoEspecimen(id,especie,habitat,veterinario);
     }
     
+    public int aforoMaximo(String habitat){
+        return daoEspec.aforoMaximo(habitat);
+    }
+    
+    public int recuperarOcupacion(String habitat){
+        return daoEspec.recuperarOcupacion(habitat);
+    }
+    
+    public boolean puedeContener(String especie, String habitat){
+        return daoEspec.puedeContener(especie, habitat);
+    }
+    
+    public boolean isMonoespecie(String habitat){
+        return daoEspec.isMonoespecie(habitat);
+    }
+    
+    public boolean compararEspecies(String especie,String habitat){
+        return daoEspec.compararEspecies(especie,habitat);
+    }
+    
+    public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
+        daoEspec.actualizarEspecimen(idAntiguo, idNuevo, especie, habitat, veterinario);
+    }
+    
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         return daoEspec.consultarCompHabitat(espe);
+    }
+    
+    public String consultarDescHabitat(String habitat){
+        return daoEspec.consultarDescHabitat(habitat);
+    }
+    
+    public String consultarInfrHabitat(String habitat){
+        return daoEspec.consultarInfrHabitat(habitat);
     }
     
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
         return daoEspec.consultarTratamientos(espe);
     }
     
-    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
-        daoEspec.nuevoTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
+    public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
+        daoEspec.nuevoTratamiento(espe, cuidador, medicamentos, fechafin);
+    }
+    
+    public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
+        daoEspec.actualizarTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
     }
 
     // NOSU

@@ -6,6 +6,7 @@
 package gui;
 
 import aplicacion.FachadaAplicacion;
+import aplicacion.Habitat;
 
 /**
  *
@@ -21,6 +22,7 @@ public class VEspecimenes extends javax.swing.JDialog {
      */
     public VEspecimenes(java.awt.Frame parent, aplicacion.FachadaAplicacion fa) {
         super(parent);
+        this.setResizable(false);
         this.fa = fa;
         initComponents();
         this.padre = (VPrincipal) parent; 
@@ -325,12 +327,15 @@ public class VEspecimenes extends javax.swing.JDialog {
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         if(!fieldId.getText().equals("") && !fieldEspecie.getText().equals("") && !fieldHabitat.getText().equals("")){
             if(tablaEspec.getSelectedRow()==-1){
-                fa.nuevoEspecimen(Integer.parseInt(fieldId.getText()),fieldEspecie.getText(),fieldHabitat.getText(),
-                        fieldVeterinario.getText());
+                if(puedeAnhadirse(fieldEspecie.getText(),fieldHabitat.getText())){
+                    fa.nuevoEspecimen(Integer.parseInt(fieldId.getText()),fieldEspecie.getText(),fieldHabitat.getText(),
+                            fieldVeterinario.getText());
+                }
             }
             else{
-                ModeloTablaEspecimenes mtu = (ModeloTablaEspecimenes) tablaEspec.getModel();
-                //fa.actualizarEspecimen();
+                ModeloTablaEspecimenes mte = (ModeloTablaEspecimenes) tablaEspec.getModel();
+                fa.actualizarEspecimen(mte.obtenerEjemplar(tablaEspec.getSelectedRow()).getIdentificador(),Integer.parseInt(fieldId.getText()),fieldEspecie.getText(),fieldHabitat.getText(),
+                        fieldVeterinario.getText());
             }
             buscarEspecimenes();
         }
@@ -395,4 +400,26 @@ public class VEspecimenes extends javax.swing.JDialog {
         }
     }
     
+    boolean puedeAnhadirse( String especie, String habitat){
+        int ocupacion=fa.recuperarOcupacion(habitat);
+        
+        if(ocupacion < fa.aforoMaximo(habitat)){
+            if(fa.puedeContener(especie, habitat)){
+                if(fa.isMonoespecie(habitat)){
+                    if(ocupacion!=0){
+                        if(fa.compararEspecies(especie,habitat)){
+                            return true;
+                        }
+                    }
+                    else{
+                        return true;
+                    }
+                }
+                else
+                    return true;
+            }
+        }
+        
+        return false;
+    }
 }

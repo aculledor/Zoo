@@ -25,6 +25,7 @@ public class VEspecimen extends javax.swing.JDialog {
     public VEspecimen(java.awt.Frame parent, aplicacion.FachadaAplicacion fa, Especimen espe) {
         super(parent);
         this.fa = fa;
+        this.setResizable(false);
         initComponents();
         this.padre = (VPrincipal) parent; 
         
@@ -37,7 +38,15 @@ public class VEspecimen extends javax.swing.JDialog {
         this.setTablaTrat();
         
         if(mTablaTrat.getRowCount()> 0){
-            tablaTratamientos.setRowSelectionInterval(0, 0);
+            tablaTratamientos.setRowSelectionInterval(0, 0);         
+            
+            ModeloTablaTratamientos m;
+            m=(ModeloTablaTratamientos) tablaTratamientos.getModel();
+            
+            fieldCuidador.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getCuidador());
+            fieldMedicacion.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getMedicamentos());
+            fieldFechaInicio.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getFechaInicio());
+            fieldFechaFin.setText(m.obtenerEjemplar(tablaTratamientos.getSelectedRow()).getFechaFin());
         }
         
         //Tabla Especimenes Reducidos
@@ -46,6 +55,8 @@ public class VEspecimen extends javax.swing.JDialog {
         
         this.setTablaReduc();
         this.fieldNombreHabitat.setText("Habitat "+especimen.getHabitat());
+        this.fielDescripcionHabitat.setText(fa.consultarDescHabitat(especimen.getHabitat()));
+        this.fieldInfraestrucHabitat.setText(fa.consultarInfrHabitat(especimen.getHabitat()));
         
         if(mTablaReduc.getRowCount()> 0){
             tablaReduc.setRowSelectionInterval(0, 0);
@@ -373,10 +384,7 @@ public class VEspecimen extends javax.swing.JDialog {
 
     private void botonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoActionPerformed
         tablaTratamientos.clearSelection();
-        
-        //botonBorrar.setEnabled(false);
-        botonGuardar.setEnabled(true);
-
+      
         fieldCuidador.setText("");
         fieldMedicacion.setText("");
         fieldFechaInicio.setText("");
@@ -384,17 +392,19 @@ public class VEspecimen extends javax.swing.JDialog {
     }//GEN-LAST:event_botonNuevoActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        if(!fieldCuidador.getText().equals("") && !fieldMedicacion.getText().equals("") && !fieldFechaInicio.getText().equals("")){
-            if(tablaTratamientos.getSelectedRow()==-1){
-                fa.nuevoTratamiento(especimen, fieldCuidador.getText(),fieldMedicacion.getText(),fieldFechaInicio.getText(),
-                        fieldFechaFin.getText());
-            }
-            else{
-                ModeloTablaEspecimenes mtu = (ModeloTablaEspecimenes) tablaTratamientos.getModel();
-                //fa.actualizarEspecimen();
-            }
-            fa.consultarTratamientos(especimen);
+        if(tablaTratamientos.getSelectedRow()==-1){
+            fa.nuevoTratamiento(especimen, fieldCuidador.getText(),fieldMedicacion.getText(), fieldFechaFin.getText());
+            mTablaTrat.setFilas(fa.consultarTratamientos(especimen));
         }
+        else{
+            fa.actualizarTratamiento(especimen, fieldCuidador.getText(),fieldMedicacion.getText(), fieldFechaInicio.getText(), fieldFechaFin.getText());
+            mTablaTrat.setFilas(fa.consultarTratamientos(especimen));
+        }
+        fa.consultarTratamientos(especimen);
+        fieldCuidador.setText("");
+        fieldMedicacion.setText("");
+        fieldFechaInicio.setText("");
+        fieldFechaFin.setText("");
     }//GEN-LAST:event_botonGuardarActionPerformed
 
 
