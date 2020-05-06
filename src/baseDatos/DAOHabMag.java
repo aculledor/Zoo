@@ -265,7 +265,7 @@ public class DAOHabMag extends AbstractDAO {
                             + " where pr.nombrepm not in( "
                                 + " select nombrepm2 "
                                 + " from poseer as po "
-                                + " where po.nombreea1 like '?') "
+                                + " where po.nombreea1 like ?) "
                     ;
             
             stmCatalogo = con.prepareStatement(consulta);
