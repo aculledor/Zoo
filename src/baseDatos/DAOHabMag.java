@@ -208,4 +208,85 @@ public class DAOHabMag extends AbstractDAO {
         return resultado;
     }
     
+    public java.util.List<String> getListaAsoc(String especie){
+        
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+
+            String consulta = "select nombrepm "
+                            + " from propiedadesmagicas as pr "
+                            + " where pr.nombrepm in( "
+                                + " select nombrepm2 "
+                                + " from poseer as po "
+                                + " where po.nombreea1 like ?) "
+                    ;
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            
+            stmCatalogo.setString(1, "%"+especie+"%");
+            
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            
+            while (rsCatalogo.next()) {
+                resultado.add(rsCatalogo.getString("nombrepm"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try { stmCatalogo.close();} catch (SQLException e) {System.out.println("Imposible cerrar cursores");}
+        }
+        
+        return resultado;
+    }
+    
+    public java.util.List<String> getListaDes(String especie){
+        
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+            String consulta = "select nombrepm "
+                            + " from propiedadesmagicas as pr "
+                            + " where pr.nombrepm not in( "
+                                + " select nombrepm2 "
+                                + " from poseer as po "
+                                + " where po.nombreea1 like ?) "
+                    ;
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            
+            stmCatalogo.setString(1, "%"+especie+"%");
+            
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            
+            while (rsCatalogo.next()) {
+                resultado.add(rsCatalogo.getString("nombrepm"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try { stmCatalogo.close();} catch (SQLException e) {System.out.println("Imposible cerrar cursores");}
+        }
+        
+        return resultado;
+    }
+    
 }

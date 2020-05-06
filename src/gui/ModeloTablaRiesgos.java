@@ -36,7 +36,7 @@ public class ModeloTablaRiesgos extends AbstractTableModel{
 
         switch (col) {
             case 0:
-                nombre = "Tipo";
+                nombre = "Designacion";
                 break;
             case 1:
                 nombre = "Tratamiento";

@@ -1,0 +1,210 @@
+CREATE TABLE Protocolos(
+    designacionPro varchar(50) NOT NULL,
+    descripcionPro varchar(50),
+    equipamiento varchar(50),
+    PRIMARY KEY (designacionPro)
+);
+
+CREATE TABLE Riesgos(
+    designacionRi varchar(50) NOT NULL,
+    tratamiento varchar(50),
+    PRIMARY KEY (designacionRi)
+);
+
+CREATE TABLE PropiedadesMagicas(
+    nombrePM varchar(50) primary key not null,
+    efectos varchar(200),
+    posiblesAplicaciones varchar(200)
+);
+
+CREATE TABLE EspeciesAnimales(
+    nombreEA varchar(50) NOT NULL,
+    esperanzaVida integer,
+    descripcionAnatomica varchar(50),
+    patologiasComunes varchar(50),
+    nivelPeligro integer,
+    comportamientoComun varchar(50),
+    dieta varchar(50),
+    PRIMARY KEY (nombreEA)
+);
+
+CREATE TABLE Implicar(
+    protocolo varchar(50) NOT NULL,
+    riesgo varchar(50) NOT NULL,
+    PRIMARY KEY(protocolo, riesgo),
+    FOREIGN KEY (protocolo) REFERENCES Protocolos(designacionPro)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (riesgo) REFERENCES Riesgos(designacionRi)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Presentar(
+    nombrePM1 varchar(50) not null,
+    designacionR varchar(50) not null,
+    primary key (nombrePM1,designacionR),
+    foreign key (nombrePM1) references PropiedadesMagicas(nombrePM)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key (designacionR) references Riesgos(designacionRi)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Convivir(
+    especie1 varchar(50) NOT NULL,
+    especie2 varchar(50) NOT NULL,
+    PRIMARY KEY(especie1, especie2),
+    FOREIGN KEY (especie1) REFERENCES EspeciesAnimales(NombreEA)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (especie2) REFERENCES EspeciesAnimales(NombreEA)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Poseer(
+    nombrePM2 varchar(50) not null,
+    nombreEA1 varchar(50) not null,
+    primary key (nombrePM2,nombreEA1),
+    foreign key (nombrePM2) references PropiedadesMagicas(nombrePM)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key (nombreEA1) references EspeciesAnimales(nombreEA)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Personal(
+    dni varchar(9) NOT NULL,
+    nombre varchar(50),
+    apellidos varchar,
+    raza varchar default 'Humano',
+    aptitudMagica varchar,
+    fechaContrato date,
+    tipoContrato varchar,
+    sueldo integer,
+    PRIMARY KEY (dni)
+);
+
+create or replace function introduce_fecha() returns trigger as $csl$
+begin
+  new.fechaContrato:= current_date;
+  return new;
+end;
+$csl$ Language plpgsql;
+
+create trigger beforeInsertPersonal before insert on personal
+for each row execute procedure introduce_fecha();
+
+CREATE TABLE AttCliente(
+    dniAtt varchar(9) NOT NULL,
+    idAtt varchar(3) NOT NULL UNIQUE,
+    PRIMARY KEY(dniAtt, idAtt),
+    FOREIGN KEY (dniAtt) REFERENCES Personal(dni)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Cuidadores(
+    dniCui varchar(9) NOT NULL,
+    idCui varchar(3) NOT NULL UNIQUE,
+    PRIMARY KEY(dniCui, idCui),
+    FOREIGN KEY (dniCui) REFERENCES Personal(dni)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Veterinarios(
+    dniVet varchar(9) NOT NULL,
+    idVet varchar(3) NOT NULL UNIQUE,
+    PRIMARY KEY (dniVet , idVet),
+    FOREIGN KEY (dniVet) REFERENCES Personal(dni)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE EquipoMantenimiento(
+    desigMan varchar(3) NOT NULL,
+    recursosMateriales varchar(50),
+    PRIMARY KEY (desigMan)
+);
+
+CREATE TABLE Mantenimiento(
+    dniMan varchar(9) NOT NULL,
+    idMan varchar(3) NOT NULL UNIQUE,
+    equipo varchar(3),
+    PRIMARY KEY (dniMan , idMan),
+    FOREIGN KEY (dniMan) REFERENCES Personal(dni)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (equipo) REFERENCES EquipoMantenimiento(desigMan)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Habitats(
+    desHabitat varchar(3) PRIMARY KEY,
+    tamano integer default 100,
+    aforo integer,
+    condiMantenimiento varchar(100),
+    medidasSeguridad varchar(100),
+    desTerreno varchar(100),
+    infraestructurasPresentes varchar(100),
+    tipoHabitat varchar(20) default 'Monoespecie',
+    equipoMantenimiento varchar(3),
+    FOREIGN KEY (equipoMantenimiento) REFERENCES EquipoMantenimiento(desigMan)
+        ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+CREATE TABLE PoderContener(
+    habitatPD varchar(3) NOT NULL,
+    especiePD varchar(50) NOT NULL,
+    PRIMARY KEY(habitatPD, especiePD),
+    FOREIGN KEY (habitatPD) REFERENCES Habitats(desHabitat)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (especiePD) REFERENCES EspeciesAnimales(NombreEA)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Seguridad(
+    dniSeg varchar(9) NOT NULL,
+    idSeg varchar(3) NOT NULL UNIQUE,
+    especializacion varchar(50) NOT NULL,
+    habitatSeg varchar(3),
+    PRIMARY KEY(dniSeg, idSeg),
+    FOREIGN KEY (dniSeg) REFERENCES Personal(dni)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (especializacion) REFERENCES EspeciesAnimales(nombreEA)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (habitatSeg) REFERENCES Habitats(desHabitat)
+        ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+CREATE TABLE Especimenes(
+    numero integer NOT NULL,
+    historialMedico varchar(500),
+    especie varchar(50) NOT NULL,
+    habitatEs varchar(3),
+    veterinarioId varchar(3),
+    PRIMARY KEY(numero,especie),
+    FOREIGN KEY (especie) REFERENCES EspeciesAnimales(nombreEA)
+        ON DELETE RESTRICT ON UPDATE CASCADE, 
+    FOREIGN KEY (habitatEs) REFERENCES Habitats(desHabitat)
+        ON DELETE RESTRICT ON UPDATE CASCADE, 
+    FOREIGN KEY (veterinarioId) REFERENCES Veterinarios(idVet)
+        ON DELETE SET NULL ON UPDATE CASCADE 
+);
+
+
+CREATE TABLE Tratar(
+    especimenEA varchar(50) NOT NULL,
+    especimenNum integer NOT NULL,
+    cuidadorId varchar(3) NOT NULL,
+    fechaInicio date,
+    fechaFin date,
+    medicamentos varchar(50),
+    PRIMARY KEY(especimenEA,especimenNum,cuidadorId,fechaInicio),
+    FOREIGN KEY (especimenEA,especimenNum) REFERENCES Especimenes(especie,numero) 
+        ON DELETE CASCADE ON UPDATE CASCADE, 
+    FOREIGN KEY (cuidadorId) REFERENCES Cuidadores(idCui)
+        ON DELETE SET NULL ON UPDATE CASCADE 
+);
+
+create or replace function introduce_fecha2() returns trigger as $csl$
+begin
+  new.fechaInicio:= current_date;
+  return new;
+end;
+$csl$ Language plpgsql;
+
+create trigger beforeInsertTratar before insert on Tratar
+for each row execute procedure introduce_fecha2();

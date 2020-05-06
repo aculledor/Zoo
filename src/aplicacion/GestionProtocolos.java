@@ -56,4 +56,8 @@ public class GestionProtocolos {
         return fbd.obteneProtocolos(id, descripcion, equipamiento);
     }
     
+    public java.util.List<Protocolo> getListaProtocolos(String riesgo){
+        return fbd.getListaProtocolos(riesgo);
+    }
+    
 }

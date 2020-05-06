@@ -57,4 +57,12 @@ public class GestionHabilidadesMagicas {
         return fbd.obtenerHabilidadesMagicas(nombre, efectos, aplicaciones);
     }
     
+    public java.util.List<String> getListaAsoc(String nombre){
+        return fbd.getListaAsoc(nombre);
+    }
+    
+    public java.util.List<String> getListaDes(String nombre){
+        return fbd.getListaDes(nombre);
+    }
+    
 }
