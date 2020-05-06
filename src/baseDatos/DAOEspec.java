@@ -33,14 +33,14 @@ public class DAOEspec extends AbstractDAO {
 
         try {
 
-            String consulta = "select numero, especie, habitates, veterinarioid "
+            String consulta = "select numero, especie, habitates, veterinarioid, historialmedico "
                 + "from especimenes";
         
             stmCatalogo = con.prepareStatement(consulta);
             rsCatalogo = stmCatalogo.executeQuery();
             while (rsCatalogo.next()) {
                 resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
-                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid")));
+                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid"), rsCatalogo.getString("historialmedico")));
             }
 
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class DAOEspec extends AbstractDAO {
 
         try {
 
-            String consulta = "select numero, especie, habitates, veterinarioid "
+            String consulta = "select numero, especie, habitates, veterinarioid, historialmedico "
                 + "from especimenes as e "
                 +"where especie like ?"
                 +"  and habitates like ?";
@@ -90,7 +90,7 @@ public class DAOEspec extends AbstractDAO {
             rsCatalogo = stmCatalogo.executeQuery();
             while (rsCatalogo.next()) {
                 resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
-                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid")));
+                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid"), rsCatalogo.getString("historialmedico")));
             }
 
         } catch (SQLException e) {
@@ -174,7 +174,7 @@ public class DAOEspec extends AbstractDAO {
 
         try {
 
-            String consulta = "select numero, especie, habitates, veterinarioid "
+            String consulta = "select numero, especie, habitates, veterinarioid, historialmedico "
                     + "from especimenes "
                     + "where habitates like ? ";
         
@@ -183,7 +183,7 @@ public class DAOEspec extends AbstractDAO {
             rsCatalogo = stmCatalogo.executeQuery();
             while (rsCatalogo.next()) {
                 resultado.add(new Especimen(rsCatalogo.getInt("numero"), rsCatalogo.getString("especie"),
-                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid")));
+                            rsCatalogo.getString("habitates"), rsCatalogo.getString("veterinarioid"), rsCatalogo.getString("historialmedico")));
             }
 
         } catch (SQLException e) {

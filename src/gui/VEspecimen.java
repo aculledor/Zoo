@@ -50,6 +50,9 @@ public class VEspecimen extends javax.swing.JDialog {
         if(mTablaReduc.getRowCount()> 0){
             tablaReduc.setRowSelectionInterval(0, 0);
         }
+        
+        //Historial Medico
+        this.fieldHistorialMedico.setText(especimen.getHistorialMedico());
     }
     
     public final void setTablaTrat(){
@@ -101,7 +104,7 @@ public class VEspecimen extends javax.swing.JDialog {
         fieldFechaInicio = new javax.swing.JTextField();
         vHistorial = new javax.swing.JPanel();
         textHistorial = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        fieldHistorialMedico = new javax.swing.JTextArea();
 
         jLabel8.setText("jLabel8");
 
@@ -308,9 +311,9 @@ public class VEspecimen extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Tratamientos", vDatos);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        textHistorial.setViewportView(jTextArea1);
+        fieldHistorialMedico.setColumns(20);
+        fieldHistorialMedico.setRows(5);
+        textHistorial.setViewportView(fieldHistorialMedico);
 
         javax.swing.GroupLayout vHistorialLayout = new javax.swing.GroupLayout(vHistorial);
         vHistorial.setLayout(vHistorialLayout);
@@ -406,6 +409,7 @@ public class VEspecimen extends javax.swing.JDialog {
     private javax.swing.JTextField fieldCuidador;
     private javax.swing.JTextField fieldFechaFin;
     private javax.swing.JTextField fieldFechaInicio;
+    private javax.swing.JTextArea fieldHistorialMedico;
     private javax.swing.JTextArea fieldInfraestrucHabitat;
     private javax.swing.JTextField fieldMedicacion;
     private javax.swing.JTextField fieldNombreHabitat;
@@ -422,7 +426,6 @@ public class VEspecimen extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tablaReduc;
     private javax.swing.JTable tablaTratamientos;
     private javax.swing.JScrollPane textHistorial;
