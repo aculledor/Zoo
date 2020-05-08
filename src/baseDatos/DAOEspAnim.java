@@ -275,7 +275,45 @@ public class DAOEspAnim extends AbstractDAO{
     }
     
     
-    
-    
-    
+   
+    public void asignarHabilidades(String especie, java.util.List<String> propMag) {
+        Connection con;
+        PreparedStatement stmBorrado = null;
+        PreparedStatement stmInsercion = null;
+
+        con = super.getConexion();
+
+        try {
+            stmBorrado = con.prepareStatement("delete from poseer where nombreea1 = ?");
+            stmBorrado.setString(1, especie);
+            stmBorrado.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        try {
+            stmInsercion = con.prepareStatement("insert into poseer(nombrepm2, nombreea1) values (?,?)");
+            for (String c : propMag) {
+                stmInsercion.setString(1, c);
+                stmInsercion.setString(2, especie);
+                stmInsercion.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+                stmInsercion.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
 }

@@ -19,8 +19,6 @@ public class VDatosEspecie extends javax.swing.JDialog {
     private ModeloListaStrings mListaAsoc;
     private ModeloListaStrings mListaDes;
     private String especie;
-    private java.util.List<String> habilidadesDes;
-    private java.util.List<String> habilidadesAsoc;
     
     
     /**
@@ -32,8 +30,6 @@ public class VDatosEspecie extends javax.swing.JDialog {
         initComponents();
         this.padre = (VPrincipal) parent;
         this.especie = especie;
-        habilidadesDes = new java.util.ArrayList<>();
-        habilidadesAsoc = new java.util.ArrayList<>();
         
         //Nombre de la especie
         labNombre.setText(this.especie);
@@ -150,14 +146,14 @@ public class VDatosEspecie extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        desasociarB.setText("des");
+        desasociarB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaD.jpg"))); // NOI18N
         desasociarB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 desasociarBActionPerformed(evt);
             }
         });
 
-        asociarB.setText("asoc");
+        asociarB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaI.jpg"))); // NOI18N
         asociarB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 asociarBActionPerformed(evt);
@@ -171,8 +167,8 @@ public class VDatosEspecie extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(desasociarB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(asociarB, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                    .addComponent(asociarB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(desasociarB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -206,9 +202,11 @@ public class VDatosEspecie extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel3)
+                .addGap(253, 253, 253))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -273,7 +271,7 @@ public class VDatosEspecie extends javax.swing.JDialog {
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 975, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -282,7 +280,7 @@ public class VDatosEspecie extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -387,7 +385,6 @@ public class VDatosEspecie extends javax.swing.JDialog {
         mRC = (ModeloListaStrings) lstDes.getModel();
         mC = (ModeloListaStrings) lstAsoc.getModel();
         mRC.nuevoElemento(mC.getElementAt(lstAsoc.getSelectedIndex()));
-        habilidadesDes.add(mC.getElementAt(lstAsoc.getSelectedIndex()));
         mC.borrarElemento(lstAsoc.getSelectedIndex());
         if (mC.getSize() == 0) {
             desasociarB.setEnabled(false);
@@ -400,7 +397,7 @@ public class VDatosEspecie extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        fa.actualizarEspecie(especie, habilidadesAsoc, habilidadesDes);
+        fa.asignarHabilidades(especie, mListaAsoc.getElementos());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -424,7 +421,7 @@ public class VDatosEspecie extends javax.swing.JDialog {
 
     private void actualizarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarBActionPerformed
         // TODO add your handling code here:
-        fa.actualizarEspecie(especie, habilidadesAsoc, habilidadesDes);
+        fa.asignarHabilidades(especie, mListaAsoc.getElementos());
         
         mListaAsoc.setElementos(this.fa.getListaAsoc(this.especie));
         mListaDes.setElementos(this.fa.getListaDes(this.especie));
@@ -436,6 +433,9 @@ public class VDatosEspecie extends javax.swing.JDialog {
             if (mTablaRiesgos.getRowCount()> 0) {
                 mTablaProtocolos.setFilas(this.fa.getListaProtocolos(mTablaRiesgos.getValueAt(0, 0).toString()));
             }
+        }
+        if (mListaDes.getSize() > 0) {
+            asociarB.setEnabled(true);
         }
     }//GEN-LAST:event_actualizarBActionPerformed
 

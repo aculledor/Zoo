@@ -70,13 +70,8 @@ public class FachadaAplicacion {
         fgui.visualizarDetallesEspecimen(padre,espe);
     }
         
-    public void actualizarEspecie(String especie, java.util.List<String> habilidadesAsoc, java.util.List<String> habilidadesDes){
-        if(!habilidadesAsoc.isEmpty()){
-            //fbd.asignarHabilidades(especie,habilidadesAsoc);
-        }
-        if(!habilidadesDes.isEmpty()){
-            //fbd.desasignarHabilidades(especie,habilidadesDes);
-        }
+    public void asignarHabilidades(String especie, java.util.List<String> habilidadesAsoc){
+        fbd.asignarHabilidades(especie,habilidadesAsoc);
     }
     
     public java.util.List<String> getListaAsoc(String nombre){
@@ -88,18 +83,18 @@ public class FachadaAplicacion {
     }
     
     public java.util.List<Riesgo> getListaRiesgos(String especie){
-        /*if(cr.getListaRiesgos(especie).isEmpty()){
+        if(cr.getListaRiesgos(especie).isEmpty()){
             java.util.List<Riesgo> aux = new java.util.ArrayList<>();
             aux.add(new Riesgo("","")); return aux;
-        }*/
+        }
         return cr.getListaRiesgos(especie);
     }
     
     public java.util.List<Protocolo> getListaProtocolos(String riesgo){
-        /*if(cp.getListaProtocolos(riesgo).isEmpty()){
+        if(riesgo.isBlank()){
             java.util.List<Protocolo> aux = new java.util.ArrayList<>();
             aux.add(new Protocolo("","","")); return aux;
-        }*/
+        }
         return cp.getListaProtocolos(riesgo);
     }
     
