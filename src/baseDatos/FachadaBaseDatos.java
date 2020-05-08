@@ -138,6 +138,10 @@ public class FachadaBaseDatos {
     public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
         daoEspec.actualizarTratamiento(espe, cuidador, medicamentos, fechainicio, fechafin);
     }
+        
+    public void asignarHabilidades(String especie, java.util.List<String> habilidadesAsoc){
+        daoEspAnim.asignarHabilidades(especie,habilidadesAsoc);
+    }
 
     // NOSU
     
