@@ -60,6 +60,10 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    /**
+     *
+     * @author Lois
+     */
     public java.util.List<Especimen> obtenerEspecimenes(Integer id, String especie, String habitat, boolean enTratamiento) {
         java.util.List<Especimen> resultado = new java.util.ArrayList<>();
         Connection con;
@@ -110,6 +114,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public void borrarEspecimen(int id, String especie){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -132,6 +141,11 @@ public class DAOEspec extends AbstractDAO {
         }
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public void nuevoEspecimen(Integer id, String especie, String habitat, String veterinario){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -167,6 +181,11 @@ public class DAOEspec extends AbstractDAO {
         }
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public void actualizarEspecimen(Integer idAntiguo, Integer idNuevo, String especie, String habitat, String veterinario){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -224,6 +243,11 @@ public class DAOEspec extends AbstractDAO {
     }
     
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public int aforoMaximo(String habitat){
         int resultado=0;
         Connection con;
@@ -258,6 +282,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public int recuperarOcupacion(String habitat){
         int resultado=0;
         Connection con;
@@ -292,6 +321,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public boolean puedeContener(String especie, String habitat){
         String resultado="";
         Connection con;
@@ -326,6 +360,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado.contains(especie);
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public boolean isMonoespecie(String habitat){
         String resultado="";
         Connection con;
@@ -360,6 +399,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado.equalsIgnoreCase("Monoespecie");
     }
    
+    
+    /**
+     *
+     * @author Lois
+     */
     public boolean compararEspecies(String especie,String habitat){
         String resultado="";
         Connection con;
@@ -395,6 +439,11 @@ public class DAOEspec extends AbstractDAO {
         
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public java.util.List<Especimen> consultarCompHabitat(Especimen espe){
         java.util.List<Especimen> resultado = new java.util.ArrayList<>();
         Connection con;
@@ -436,6 +485,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public String consultarDescHabitat(String habitat){
         String resultado="";
         Connection con;
@@ -472,6 +526,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public String consultarInfrHabitat(String habitat){
         String resultado="";
         Connection con;
@@ -508,6 +567,11 @@ public class DAOEspec extends AbstractDAO {
     }
     
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public java.util.List<Tratamiento> consultarTratamientos(Especimen espe){
         java.util.List<Tratamiento> resultado = new java.util.ArrayList<>();
         Connection con;
@@ -546,6 +610,11 @@ public class DAOEspec extends AbstractDAO {
         return resultado;
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public void nuevoTratamiento(Especimen espe, String cuidador, String medicamentos, String fechafin){
         Connection con;
         PreparedStatement stmUsuario=null;
@@ -585,6 +654,11 @@ public class DAOEspec extends AbstractDAO {
         }
     }
     
+    
+    /**
+     *
+     * @author Lois
+     */
     public void actualizarTratamiento(Especimen espe, String cuidador, String medicamentos, String fechainicio, String fechafin){
         Connection con;
         PreparedStatement stmUsuario=null;
