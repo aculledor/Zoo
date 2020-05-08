@@ -10,10 +10,10 @@ insert into PropiedadesMagicas values('Vuelo','Movimiento o efecto a través del 
 insert into PropiedadesMagicas values('Ignifugidad','Resistencia al fuego y al calor','Labores de rescate');
 insert into PropiedadesMagicas values('Teletransporte','Mover objetos o partículas de un lugar a otro instantáneamente','Comunicación y desplazamiento inmediato');
 
-INSERT INTO EspeciesAnimales (nombreEA, esperanzaVida, descripcionAnatomica, patologiasComunes, comportamientoComun, dieta) 
-VALUES ('Dragon', 100, 'Dragon nórdico con 4 patas y 2 alas', 'Ardores de estomago', 'Usualmente agresivos', 'Carnívoro');
-INSERT INTO EspeciesAnimales (nombreEA, esperanzaVida, descripcionAnatomica, patologiasComunes, comportamientoComun, dieta) 
-VALUES ('Chupoptero', 3, 'Mosquito gigante', 'Anemia', 'Pacíficos y asustadizos', 'Omnívoro');
+INSERT INTO EspeciesAnimales (nombreEA, esperanzaVida, descripcionAnatomica, patologiasComunes, nivelPeligro, comportamientoComun, dieta) 
+VALUES ('Dragon', 100, 'Dragon nórdico con 4 patas y 2 alas', 'Ardores de estomago', 5, 'Usualmente agresivos', 'Carnívoro');
+INSERT INTO EspeciesAnimales (nombreEA, esperanzaVida, descripcionAnatomica, patologiasComunes, nivelPeligro, comportamientoComun, dieta) 
+VALUES ('Chupoptero', 3, 'Mosquito gigante', 'Anemia', 2, 'Pacíficos y asustadizos', 'Omnívoro');
 
 INSERT INTO Implicar (protocolo, riesgo) VALUES ('MT-101', 'Quemaduras Mágicas');
 INSERT INTO Implicar (protocolo, riesgo) VALUES ('GP-96', 'Hipnosis');
