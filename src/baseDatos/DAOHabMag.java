@@ -22,6 +22,10 @@ public class DAOHabMag extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
     
+    
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<HabilidadMagica> consultarHabilidadesMagicas() {
         
         java.util.List<HabilidadMagica> resultado = new java.util.ArrayList<>();
@@ -67,6 +71,9 @@ public class DAOHabMag extends AbstractDAO {
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void insertarHabilidadMagica(HabilidadMagica propiedad) throws SQLException {
         
         Connection con;
@@ -93,6 +100,9 @@ public class DAOHabMag extends AbstractDAO {
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void modificarHabilidadMagica(HabilidadMagica propiedad)  throws SQLException{
         
         Connection con;
@@ -122,6 +132,9 @@ public class DAOHabMag extends AbstractDAO {
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void eliminarHabilidadMagica(String id){
         
         Connection con;
@@ -156,7 +169,9 @@ public class DAOHabMag extends AbstractDAO {
     }
     
     
-    
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<HabilidadMagica> obtenerHabilidadesMagicas(String nombre, String efectos, String aplicaciones) {
         
         java.util.List<HabilidadMagica> resultado = new java.util.ArrayList<>();
