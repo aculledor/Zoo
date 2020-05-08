@@ -80,12 +80,13 @@ public class DAOEspec extends AbstractDAO {
             
             
             if (enTratamiento)
-            consulta = consulta + "  and exists (select * "+
+                consulta = consulta + "  and exists (select * "+
                                          "              from tratar as tr "+
                                          "             	where e.especie =tr.especimenea "+
                                          "             	and e.numero=tr.especimennum "+
                                          "              and tr.fechafin is null)";
             
+            consulta+="order by especie, numero";
             
             stmCatalogo = con.prepareStatement(consulta);
             stmCatalogo.setString(1, "%"+especie+"%");
@@ -172,30 +173,53 @@ public class DAOEspec extends AbstractDAO {
         
         con=this.getConexion();
         
-        String consulta = "update especimenes " + 
-                          "set numero = ?, "
-                        + "especie = ?, "
-                        + "habitates = ?, "
-                        + "veterinarioid = ? "
-                        + "where numero = ? "
-                        + "and especie like ? ";
-        try  {
-            stmUsuario=con.prepareStatement(consulta);
-            
-            stmUsuario.setInt(1, idNuevo);
-            stmUsuario.setString(2, especie);
-            stmUsuario.setString(3, habitat);
-            stmUsuario.setString(4, veterinario);
-            stmUsuario.setInt(5, idAntiguo);
-            //stmUsuario.setInt(5, especieAntigua);
-            
-            stmUsuario.executeUpdate();
+        if(!veterinario.equals("")){
+            String consulta = "update especimenes " + 
+                              "set numero = ?, "
+                            + "habitates = ?, "
+                            + "veterinarioid = ? "
+                            + "where numero = ? "
+                            + "and especie like ? ";
+            try  {
+                stmUsuario=con.prepareStatement(consulta);
 
-        } catch (SQLException e){
-          System.out.println(e.getMessage());
-          this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+                stmUsuario.setInt(1, idNuevo);
+                stmUsuario.setString(2, habitat);
+                stmUsuario.setString(3, veterinario);
+                stmUsuario.setInt(4, idAntiguo);
+                stmUsuario.setString(5, especie);
+
+                stmUsuario.executeUpdate();
+
+            } catch (SQLException e){
+              System.out.println(e.getMessage());
+              this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }finally{
+              try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            }
+        }
+        else{
+            String consulta = "update especimenes " + 
+                              "set numero = ?, "
+                            + "habitates = ? "
+                            + "where numero = ? "
+                            + "and especie like ? ";
+            try  {
+                stmUsuario=con.prepareStatement(consulta);
+
+                stmUsuario.setInt(1, idNuevo);
+                stmUsuario.setString(2, habitat);
+                stmUsuario.setInt(3, idAntiguo);
+                stmUsuario.setString(4, especie);
+
+                stmUsuario.executeUpdate();
+
+            } catch (SQLException e){
+              System.out.println(e.getMessage());
+              this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+            }finally{
+              try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            }
         }
     }
     

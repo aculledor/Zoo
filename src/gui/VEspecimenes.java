@@ -334,8 +334,10 @@ public class VEspecimenes extends javax.swing.JDialog {
             }
             else{
                 ModeloTablaEspecimenes mte = (ModeloTablaEspecimenes) tablaEspec.getModel();
-                fa.actualizarEspecimen(mte.obtenerEjemplar(tablaEspec.getSelectedRow()).getIdentificador(),Integer.parseInt(fieldId.getText()),fieldEspecie.getText(),fieldHabitat.getText(),
-                        fieldVeterinario.getText());
+                if(puedeActualizarse(mte.obtenerEjemplar(tablaEspec.getSelectedRow()).getEspecie(),mte.obtenerEjemplar(tablaEspec.getSelectedRow()).getHabitat() ,fieldHabitat.getText())){
+                    fa.actualizarEspecimen(mte.obtenerEjemplar(tablaEspec.getSelectedRow()).getIdentificador(),Integer.parseInt(fieldId.getText()),mte.obtenerEjemplar(tablaEspec.getSelectedRow()).getEspecie(),fieldHabitat.getText(),
+                            fieldVeterinario.getText());
+                }
             }
             buscarEspecimenes();
         }
@@ -400,7 +402,7 @@ public class VEspecimenes extends javax.swing.JDialog {
         }
     }
     
-    boolean puedeAnhadirse( String especie, String habitat){
+    boolean puedeAnhadirse(String especie, String habitat){
         int ocupacion=fa.recuperarOcupacion(habitat);
         
         if(ocupacion < fa.aforoMaximo(habitat)){
@@ -408,6 +410,33 @@ public class VEspecimenes extends javax.swing.JDialog {
                 if(fa.isMonoespecie(habitat)){
                     if(ocupacion!=0){
                         if(fa.compararEspecies(especie,habitat)){
+                            return true;
+                        }
+                    }
+                    else{
+                        return true;
+                    }
+                }
+                else
+                    return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    boolean puedeActualizarse(String especie,String habitatViejo, String habitatNuevo){
+        
+        if(habitatViejo.equalsIgnoreCase(habitatNuevo)){
+            return true;
+        }
+        int ocupacion=fa.recuperarOcupacion(habitatNuevo);
+        
+        if(ocupacion < fa.aforoMaximo(habitatNuevo)){
+            if(fa.puedeContener(especie, habitatNuevo)){
+                if(fa.isMonoespecie(habitatNuevo)){
+                    if(ocupacion!=0){
+                        if(fa.compararEspecies(especie,habitatNuevo)){
                             return true;
                         }
                     }
