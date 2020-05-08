@@ -29,6 +29,7 @@ public class VEspecimen extends javax.swing.JDialog {
         initComponents();
         this.padre = (VPrincipal) parent; 
         
+        
         this.especimen=espe;
         
         //Tabla tratamientos

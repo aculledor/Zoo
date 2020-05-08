@@ -25,7 +25,7 @@ public class VEspecimenes extends javax.swing.JDialog {
         this.setResizable(false);
         this.fa = fa;
         initComponents();
-        this.padre = (VPrincipal) parent; 
+        this.padre = (VPrincipal) parent;   
         
         mTablaEspec = new ModeloTablaEspecimenes();
         tablaEspec.setModel(mTablaEspec);

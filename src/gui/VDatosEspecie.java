@@ -31,6 +31,8 @@ public class VDatosEspecie extends javax.swing.JDialog {
         this.padre = (VPrincipal) parent;
         this.especie = especie;
         
+
+        
         //Nombre de la especie
         labNombre.setText(this.especie);
         

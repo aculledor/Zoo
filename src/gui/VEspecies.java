@@ -32,6 +32,8 @@ public class VEspecies extends javax.swing.JDialog {
         initComponents();
         this.padre = (VPrincipal) parent;
         
+
+        
         // ESPECIES
         
         mTablaEspecies = new ModeloTablaEspecies();
@@ -548,7 +550,7 @@ public class VEspecies extends javax.swing.JDialog {
         );
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton2.setText("GARDAR");
+        jButton2.setText("GUARDAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -556,7 +558,7 @@ public class VEspecies extends javax.swing.JDialog {
         });
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton3.setText("NOVO");
+        jButton3.setText("NUEVO");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -714,7 +716,7 @@ public class VEspecies extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable2);
 
         jButton7.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton7.setText("GARDAR");
+        jButton7.setText("GUARDAR");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -722,7 +724,7 @@ public class VEspecies extends javax.swing.JDialog {
         });
 
         jButton8.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton8.setText("NOVO");
+        jButton8.setText("NUEVO");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -922,7 +924,7 @@ public class VEspecies extends javax.swing.JDialog {
         jScrollPane3.setViewportView(jTable3);
 
         jButton11.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton11.setText("GARDAR");
+        jButton11.setText("GUARDAR");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -938,7 +940,7 @@ public class VEspecies extends javax.swing.JDialog {
         });
 
         jButton13.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton13.setText("NOVO");
+        jButton13.setText("NUEVO");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -1114,7 +1116,7 @@ public class VEspecies extends javax.swing.JDialog {
         jScrollPane4.setViewportView(jTable4);
 
         jButton15.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton15.setText("GARDAR");
+        jButton15.setText("GUARDAR");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -1122,7 +1124,7 @@ public class VEspecies extends javax.swing.JDialog {
         });
 
         jButton16.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton16.setText("NOVO");
+        jButton16.setText("NUEVO");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton16ActionPerformed(evt);
