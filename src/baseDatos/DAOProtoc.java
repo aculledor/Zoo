@@ -208,6 +208,10 @@ public class DAOProtoc extends AbstractDAO {
         return resultado;
     }
     
+    
+    /*
+    *   Realizado por Abraham
+    */
     public java.util.List<Protocolo> getListaProtocolos(String riesgo){
         
         java.util.List<Protocolo> resultado = new java.util.ArrayList<>();

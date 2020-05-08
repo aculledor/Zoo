@@ -200,6 +200,10 @@ public class DAORiesg extends AbstractDAO {
         return resultado;
     }
     
+    
+    /*
+    *   Realizado por Abraham
+    */
     public java.util.List<Riesgo> getListaRiesgos(String habilidad){
         
         java.util.List<Riesgo> resultado = new java.util.ArrayList<>();

@@ -208,6 +208,10 @@ public class DAOHabMag extends AbstractDAO {
         return resultado;
     }
     
+    
+    /*
+    *   Realizado por Abraham
+    */
     public java.util.List<String> getListaAsoc(String especie){
         
         java.util.List<String> resultado = new java.util.ArrayList<>();
@@ -249,6 +253,10 @@ public class DAOHabMag extends AbstractDAO {
         return resultado;
     }
     
+    
+    /*
+    *   Realizado por Abraham
+    */
     public java.util.List<String> getListaDes(String especie){
         
         java.util.List<String> resultado = new java.util.ArrayList<>();

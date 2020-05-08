@@ -143,7 +143,6 @@ public class FachadaBaseDatos {
         daoEspAnim.asignarHabilidades(especie,habilidadesAsoc);
     }
 
-    // NOSU
     
     public java.util.List<Especie> consultarEspecies(){
        return daoEspAnim.consultarEspecies();

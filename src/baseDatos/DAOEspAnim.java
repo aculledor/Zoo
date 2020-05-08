@@ -148,23 +148,6 @@ public class DAOEspAnim extends AbstractDAO{
             
             stmCatalogo.executeUpdate();
         
-        /*
-        } catch(SQLException e) {
-            
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-            
-        } finally {
-            
-            try {
-                stmCatalogo.close();
-                
-            } catch (SQLException e) {
-                
-                System.out.println("Imposible cerrar cursores");
-            }
-        }*/
-        
         try {
                 stmCatalogo.close();
                 
@@ -275,7 +258,9 @@ public class DAOEspAnim extends AbstractDAO{
     }
     
     
-   
+    /*
+    *   Realizado por Abraham
+    */
     public void asignarHabilidades(String especie, java.util.List<String> propMag) {
         Connection con;
         PreparedStatement stmBorrado = null;
