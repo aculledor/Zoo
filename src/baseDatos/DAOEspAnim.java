@@ -22,6 +22,10 @@ public class DAOEspAnim extends AbstractDAO{
         super.setFachadaAplicacion(fa);
     }
     
+    
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<Especie> consultarEspecies() {
         
         java.util.List<Especie> resultado = new java.util.ArrayList<>();
@@ -68,6 +72,9 @@ public class DAOEspAnim extends AbstractDAO{
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void insertarEspecie(Especie especie) throws SQLException {
         
         Connection con;
@@ -119,6 +126,9 @@ public class DAOEspAnim extends AbstractDAO{
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void modificarEspecie(Especie especie)  throws SQLException{
         
         Connection con;
@@ -158,6 +168,9 @@ public class DAOEspAnim extends AbstractDAO{
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void eliminarEspecie(String id){
         
         Connection con;
@@ -191,7 +204,9 @@ public class DAOEspAnim extends AbstractDAO{
     }
     
     
-    
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<Especie> obtenerEspecies(String nombre, Integer vida, Integer peligrosidad, String dieta) {
         
         java.util.List<Especie> resultado = new java.util.ArrayList<>();

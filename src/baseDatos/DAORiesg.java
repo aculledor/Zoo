@@ -22,6 +22,10 @@ public class DAORiesg extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
     
+    
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<Riesgo> consultarRiesgos() {
         
         java.util.List<Riesgo> resultado = new java.util.ArrayList<>();
@@ -65,6 +69,9 @@ public class DAORiesg extends AbstractDAO {
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void insertarRiesgo(Riesgo riesgo) throws SQLException {
         
         Connection con;
@@ -90,6 +97,9 @@ public class DAORiesg extends AbstractDAO {
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void modificarRiesgo(Riesgo riesgo)  throws SQLException{
         
         Connection con;
@@ -117,6 +127,9 @@ public class DAORiesg extends AbstractDAO {
     }
     
     
+    /*
+    *   Realizado por Noel
+    */
     public void eliminarRiesgo(String id){
         
         Connection con;
@@ -151,7 +164,9 @@ public class DAORiesg extends AbstractDAO {
     }
     
     
-    
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<Riesgo> obteneRiesgos(String tipo, String tratamiento) {
         
         java.util.List<Riesgo> resultado = new java.util.ArrayList<>();

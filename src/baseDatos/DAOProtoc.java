@@ -22,6 +22,9 @@ public class DAOProtoc extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
     
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<Protocolo> consultarProtocolos() {
         
         java.util.List<Protocolo> resultado = new java.util.ArrayList<>();
@@ -66,7 +69,9 @@ public class DAOProtoc extends AbstractDAO {
         return resultado;
     }
     
-    
+    /*
+    *   Realizado por Noel
+    */
     public void insertarProtocolo(Protocolo precaucion) throws SQLException {
         
         Connection con;
@@ -92,7 +97,9 @@ public class DAOProtoc extends AbstractDAO {
             }
     }
     
-    
+    /*
+    *   Realizado por Noel
+    */
     public void modificarProtocolo(Protocolo precaucion)  throws SQLException{
         
         Connection con;
@@ -121,7 +128,9 @@ public class DAOProtoc extends AbstractDAO {
             }
     }
     
-    
+    /*
+    *   Realizado por Noel
+    */
     public void eliminarProtocolo(String id){
         
         Connection con;
@@ -155,8 +164,9 @@ public class DAOProtoc extends AbstractDAO {
         }
     }
     
-    
-    
+    /*
+    *   Realizado por Noel
+    */
     public java.util.List<Protocolo> obteneProtocolos(String id, String descripcion, String equipamiento) {
         
         java.util.List<Protocolo> resultado = new java.util.ArrayList<>();
