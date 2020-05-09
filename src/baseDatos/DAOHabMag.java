@@ -312,4 +312,137 @@ public class DAOHabMag extends AbstractDAO {
         return resultado;
     }
     
+    
+    /*
+    *   Realizado por Abraham
+    */
+    public java.util.List<String> getListaRiesgosAsoc(String nombre){
+        
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+            String consulta = "select designacionri "
+                            + " from riesgos as ri "
+                            + " where ri.designacionri in( "
+                                + " select designacionr "
+                                + " from presentar as pr "
+                                + " where pr.nombrepm1 like ?) "
+                    ;
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            
+            stmCatalogo.setString(1, "%"+nombre+"%");
+            
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            
+            while (rsCatalogo.next()) {
+                resultado.add(rsCatalogo.getString("designacionri"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try { stmCatalogo.close();} catch (SQLException e) {System.out.println("Imposible cerrar cursores");}
+        }
+        
+        return resultado;
+    }
+    
+    
+    /*
+    *   Realizado por Abraham
+    */
+    public java.util.List<String> getListaRiesgosDes(String nombre){
+        
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+            String consulta = "select designacionri "
+                            + " from riesgos as ri "
+                            + " where ri.designacionri not in( "
+                                + " select designacionr "
+                                + " from presentar as pr "
+                                + " where pr.nombrepm1 like ?) "
+                    ;
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            
+            stmCatalogo.setString(1, "%"+nombre+"%");
+            
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            
+            while (rsCatalogo.next()) {
+                resultado.add(rsCatalogo.getString("designacionri"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try { stmCatalogo.close();} catch (SQLException e) {System.out.println("Imposible cerrar cursores");}
+        }
+        
+        return resultado;
+    }
+    
+    
+    /*
+    *   Realizado por Abraham
+    */ 
+    public void asignarRiesgos(String porpMag, java.util.List<String> riesgosAsoc){
+        Connection con;
+        PreparedStatement stmBorrado = null;
+        PreparedStatement stmInsercion = null;
+
+        con = super.getConexion();
+
+        try {
+            stmBorrado = con.prepareStatement("delete from presentar where nombrepm1 = ?");
+            stmBorrado.setString(1, porpMag);
+            stmBorrado.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        try {
+            stmInsercion = con.prepareStatement("insert into presentar(nombrepm1, designacionr) values (?,?)");
+            for (String c : riesgosAsoc) {
+                stmInsercion.setString(1, porpMag);
+                stmInsercion.setString(2, c);
+                stmInsercion.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+                stmInsercion.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+    
 }

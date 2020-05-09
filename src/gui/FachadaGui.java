@@ -19,6 +19,7 @@ public class FachadaGui {
     VEspecimen vdetesp;
     VEspecies vea;
     VDatosEspecie vdae;
+    VRiesgosDePropMag vripro;
             
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
@@ -52,5 +53,10 @@ public class FachadaGui {
     public void visualizarDetallesEspecimen(VPrincipal padre,Especimen espe){
         this.vdetesp = new VEspecimen(padre, fa, espe);
         vdetesp.setVisible(true);
+    }
+    
+    public void visualizarRiesgosPropMag(VPrincipal padre, String especie){
+        this.vripro = new VRiesgosDePropMag(padre, fa, especie);
+        vripro.setVisible(true);
     }
 }

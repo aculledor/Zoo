@@ -50,6 +50,10 @@ public class FachadaAplicacion {
         fgui.visualizarDatosEspecie(padre, especie);
     }
     
+    public void visualizarRiesgosPropMag(VPrincipal padre, String especie){
+        fgui.visualizarRiesgosPropMag(padre, especie);
+    }
+    
     public java.util.List<Especimen> consultarEspecimenes(){
         return ce.consultarEspecimenes();
     }
@@ -80,6 +84,18 @@ public class FachadaAplicacion {
     
     public java.util.List<String> getListaDes(String nombre){
         return cpm.getListaDes(nombre);
+    }
+    
+    public java.util.List<String> getListaRiesgosAsoc(String nombre){
+        return cpm.getListaRiesgosAsoc(nombre);
+    }
+    
+    public java.util.List<String> getListaRiesgosDes(String nombre){
+        return cpm.getListaRiesgosDes(nombre);
+    }
+        
+    public void asignarRiesgos(String porpMag, java.util.List<String> riesgosAsoc){
+        fbd.asignarRiesgos(porpMag,riesgosAsoc);
     }
     
     public java.util.List<Riesgo> getListaRiesgos(String especie){
