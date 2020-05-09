@@ -11,30 +11,30 @@ import aplicacion.FachadaAplicacion;
  *
  * @author aculledor
  */
-public class VRiesgosDePropMag extends javax.swing.JDialog {
+public class VProtoDeRiesgos extends javax.swing.JDialog {
     private VPrincipal padre;
     private FachadaAplicacion fa;
     private ModeloListaStrings mListaAsoc;
     private ModeloListaStrings mListaDes;
-    private String propMag;
+    private String riesgo;
 
     /**
      * Creates new form VRiesgosDePropMag
      */
-    public VRiesgosDePropMag(java.awt.Frame parent, aplicacion.FachadaAplicacion fa, String propMag) {
+    public VProtoDeRiesgos(java.awt.Frame parent, aplicacion.FachadaAplicacion fa, String riesgo) {
         super(parent);
         this.fa = fa;
         initComponents();
         this.padre = (VPrincipal) parent;
-        this.propMag = propMag;
+        this.riesgo = riesgo;
         
         //Nombre de la propiedad magica
-        labNombre.setText(this.propMag);
+        labNombre.setText(this.riesgo);
         
         //Riesgos que SI tiene
         mListaAsoc = new ModeloListaStrings();
         lstAsoc.setModel(mListaAsoc);
-        mListaAsoc.setElementos(this.fa.getListaRiesgosAsoc(this.propMag));
+        mListaAsoc.setElementos(this.fa.getListaProtoAsoc(this.riesgo));
         if (mListaAsoc.getSize() > 0) {
             lstAsoc.setSelectedIndex(0);
             desasociarB.setEnabled(true);
@@ -45,7 +45,7 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
         //Riesgos que NO tiene
         mListaDes= new ModeloListaStrings();
         lstDes.setModel(mListaDes);
-        mListaDes.setElementos(this.fa.getListaRiesgosDes(this.propMag));
+        mListaDes.setElementos(this.fa.getListaProtoDes(this.riesgo));
         if (mListaDes.getSize() > 0) {
             lstDes.setSelectedIndex(0);
             asociarB.setEnabled(true);
@@ -67,23 +67,25 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         labNombre = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstAsoc = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstDes = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
-        desasociarB = new javax.swing.JButton();
         asociarB = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        actualizarB = new javax.swing.JButton();
-        salirB = new javax.swing.JButton();
+        desasociarB = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labNombre.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        labNombre.setText("NOMBRE PROP MAG");
-        labNombre.setToolTipText("");
+        labNombre.setText("Nombre Riesgo");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setText("Protocolos asignados");
 
         lstAsoc.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lstAsoc.setModel(new javax.swing.AbstractListModel<String>() {
@@ -93,6 +95,9 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(lstAsoc);
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setText("Protocolos sin asignar");
+
         lstDes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lstDes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -101,13 +106,7 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(lstDes);
 
-        desasociarB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaD.jpg"))); // NOI18N
-        desasociarB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                desasociarBActionPerformed(evt);
-            }
-        });
-
+        asociarB.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         asociarB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaI.jpg"))); // NOI18N
         asociarB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,46 +114,48 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
             }
         });
 
+        desasociarB.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        desasociarB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/flechaD.jpg"))); // NOI18N
+        desasociarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desasociarBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(asociarB, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                    .addComponent(desasociarB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(asociarB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(desasociarB, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(desasociarB, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(asociarB, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(desasociarB, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(asociarB, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setText("Riesgos asignados");
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel3.setText("Riesgos sin asignar");
-
-        actualizarB.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        actualizarB.setText("ACTUALIZAR");
-        actualizarB.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton1.setText("ACTUALIZAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarBActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        salirB.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        salirB.setText("SALIR");
-        salirB.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton2.setText("SALIR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirBActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -165,45 +166,46 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(actualizarB, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(salirB, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                        .addGap(509, 509, 509))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 21, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(204, 204, 204)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(actualizarB, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salirB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -222,7 +224,7 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void desasociarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desasociarBActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:   
         ModeloListaStrings mRC;
         ModeloListaStrings mC;
 
@@ -257,18 +259,18 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
         desasociarB.setEnabled(true);
     }//GEN-LAST:event_asociarBActionPerformed
 
-    private void salirBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        fa.asignarRiesgos(propMag, mListaAsoc.getElementos());
+        fa.asignarProto(riesgo, mListaAsoc.getElementos());
         this.dispose();
-    }//GEN-LAST:event_salirBActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void actualizarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarBActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        fa.asignarRiesgos(propMag, mListaAsoc.getElementos());
+        fa.asignarProto(riesgo, mListaAsoc.getElementos());
         
-        mListaAsoc.setElementos(this.fa.getListaRiesgosAsoc(this.propMag));
-        mListaDes.setElementos(this.fa.getListaRiesgosDes(this.propMag));
+        mListaAsoc.setElementos(this.fa.getListaProtoAsoc(riesgo));
+        mListaDes.setElementos(this.fa.getListaProtoDes(riesgo));
         if (mListaAsoc.getSize() > 0) {
             lstAsoc.setSelectedIndex(0);
             desasociarB.setEnabled(true);
@@ -276,13 +278,14 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
         if (mListaDes.getSize() > 0) {
             asociarB.setEnabled(true);
         }
-    }//GEN-LAST:event_actualizarBActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton actualizarB;
     private javax.swing.JButton asociarB;
     private javax.swing.JButton desasociarB;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -292,6 +295,5 @@ public class VRiesgosDePropMag extends javax.swing.JDialog {
     private javax.swing.JLabel labNombre;
     private javax.swing.JList<String> lstAsoc;
     private javax.swing.JList<String> lstDes;
-    private javax.swing.JButton salirB;
     // End of variables declaration//GEN-END:variables
 }

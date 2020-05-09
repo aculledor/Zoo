@@ -61,4 +61,16 @@ public class GestionRiesgos {
         return fbd.getListaRiesgos(especie);
     }
     
+    public java.util.List<String> getListaProtoAsoc(String nombre){
+        return fbd.getListaProtoAsoc(nombre);
+    }
+    
+    public java.util.List<String> getListaProtoDes(String nombre){
+        return fbd.getListaProtoDes(nombre);
+    }
+        
+    public void asignarProto(String riesgo, java.util.List<String> protoAsoc){
+        fbd.asignarProto(riesgo,protoAsoc);
+    }
+    
 }

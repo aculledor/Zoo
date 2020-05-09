@@ -1499,6 +1499,7 @@ public class VEspecies extends javax.swing.JDialog {
 
     private void asigProtoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asigProtoBActionPerformed
         // TODO add your handling code here:
+        fa.visualizarProtoRiesgos(this.padre,jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString());
     }//GEN-LAST:event_asigProtoBActionPerformed
 
 

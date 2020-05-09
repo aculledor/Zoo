@@ -20,6 +20,7 @@ public class FachadaGui {
     VEspecies vea;
     VDatosEspecie vdae;
     VRiesgosDePropMag vripro;
+    VProtoDeRiesgos vprori;
             
 
     public FachadaGui(aplicacion.FachadaAplicacion fa) {
@@ -55,8 +56,13 @@ public class FachadaGui {
         vdetesp.setVisible(true);
     }
     
-    public void visualizarRiesgosPropMag(VPrincipal padre, String especie){
-        this.vripro = new VRiesgosDePropMag(padre, fa, especie);
+    public void visualizarRiesgosPropMag(VPrincipal padre, String propMag){
+        this.vripro = new VRiesgosDePropMag(padre, fa, propMag);
         vripro.setVisible(true);
+    }
+    
+    public void visualizarProtoRiesgos(VPrincipal padre, String riesgo){
+        this.vprori = new VProtoDeRiesgos(padre, fa, riesgo);
+        vprori.setVisible(true);
     }
 }

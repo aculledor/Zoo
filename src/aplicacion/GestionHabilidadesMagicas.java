@@ -72,5 +72,9 @@ public class GestionHabilidadesMagicas {
     public java.util.List<String> getListaRiesgosDes(String nombre){
         return fbd.getListaRiesgosDes(nombre);
     }
+        
+    public void asignarRiesgos(String porpMag, java.util.List<String> riesgosAsoc){
+        fbd.asignarRiesgos(porpMag,riesgosAsoc);
+    }
     
 }

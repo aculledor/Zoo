@@ -252,5 +252,17 @@ public class FachadaBaseDatos {
         daoHabMag.asignarRiesgos(porpMag,riesgosAsoc);
     }
     
+    public java.util.List<String> getListaProtoAsoc(String nombre){
+        return daoRiesg.getListaProtoAsoc(nombre);
+    }
+    
+    public java.util.List<String> getListaProtoDes(String nombre){
+        return daoRiesg.getListaProtoDes(nombre);
+    }
+        
+    public void asignarProto(String riesgo, java.util.List<String> protoAsoc){
+        daoRiesg.asignarProto(riesgo,protoAsoc);
+    }
+    
     
 }

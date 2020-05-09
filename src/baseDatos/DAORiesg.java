@@ -261,4 +261,140 @@ public class DAORiesg extends AbstractDAO {
         return resultado;
     }
     
+    
+    
+    /*
+    *   Realizado por Abraham
+    */
+    public java.util.List<String> getListaProtoAsoc(String nombre){
+        
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+            String consulta = "select designacionpro "
+                            + " from protocolos as pro "
+                            + " where pro.designacionpro in( "
+                                + " select protocolo "
+                                + " from implicar as im "
+                                + " where im.riesgo like ?) "
+                    ;
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            
+            stmCatalogo.setString(1, "%"+nombre+"%");
+            
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            
+            while (rsCatalogo.next()) {
+                resultado.add(rsCatalogo.getString("designacionpro"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try { stmCatalogo.close();} catch (SQLException e) {System.out.println("Imposible cerrar cursores");}
+        }
+        
+        return resultado;
+    }
+    
+    
+    
+    /*
+    *   Realizado por Abraham
+    */
+    public java.util.List<String> getListaProtoDes(String nombre){
+        
+        java.util.List<String> resultado = new java.util.ArrayList<>();
+        
+        Connection con;
+        PreparedStatement stmCatalogo = null;
+        ResultSet rsCatalogo;
+
+        con = this.getConexion();
+
+        try {
+            String consulta = "select designacionpro "
+                            + " from protocolos as pro "
+                            + " where pro.designacionpro not in( "
+                                + " select protocolo "
+                                + " from implicar as im "
+                                + " where im.riesgo like ?) "
+                    ;
+            
+            stmCatalogo = con.prepareStatement(consulta);
+            
+            stmCatalogo.setString(1, "%"+nombre+"%");
+            
+            rsCatalogo = stmCatalogo.executeQuery();
+            
+            
+            while (rsCatalogo.next()) {
+                resultado.add(rsCatalogo.getString("designacionpro"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try { stmCatalogo.close();} catch (SQLException e) {System.out.println("Imposible cerrar cursores");}
+        }
+        
+        return resultado;
+    }
+     
+    
+    
+    /*
+    *   Realizado por Abraham
+    */   
+    public void asignarProto(String riesgo, java.util.List<String> protoAsoc){
+        Connection con;
+        PreparedStatement stmBorrado = null;
+        PreparedStatement stmInsercion = null;
+
+        con = super.getConexion();
+
+        try {
+            stmBorrado = con.prepareStatement("delete from implicar where riesgo = ?");
+            stmBorrado.setString(1, riesgo);
+            stmBorrado.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+        try {
+            stmInsercion = con.prepareStatement("insert into implicar(protocolo, riesgo) values (?,?)");
+            for (String c : protoAsoc) {
+                stmInsercion.setString(1, c);
+                stmInsercion.setString(2, riesgo);
+                stmInsercion.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        } finally {
+            try {
+                stmBorrado.close();
+                stmInsercion.close();
+            } catch (SQLException e) {
+                System.out.println("Imposible cerrar cursores");
+            }
+        }
+    }
+    
 }

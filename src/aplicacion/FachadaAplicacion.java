@@ -50,8 +50,12 @@ public class FachadaAplicacion {
         fgui.visualizarDatosEspecie(padre, especie);
     }
     
-    public void visualizarRiesgosPropMag(VPrincipal padre, String especie){
-        fgui.visualizarRiesgosPropMag(padre, especie);
+    public void visualizarRiesgosPropMag(VPrincipal padre, String propMag){
+        fgui.visualizarRiesgosPropMag(padre, propMag);
+    }
+    
+    public void visualizarProtoRiesgos(VPrincipal padre, String riesgo){
+        fgui.visualizarProtoRiesgos(padre, riesgo);
     }
     
     public java.util.List<Especimen> consultarEspecimenes(){
@@ -95,7 +99,19 @@ public class FachadaAplicacion {
     }
         
     public void asignarRiesgos(String porpMag, java.util.List<String> riesgosAsoc){
-        fbd.asignarRiesgos(porpMag,riesgosAsoc);
+        cpm.asignarRiesgos(porpMag,riesgosAsoc);
+    }
+    
+    public java.util.List<String> getListaProtoAsoc(String nombre){
+        return cr.getListaProtoAsoc(nombre);
+    }
+    
+    public java.util.List<String> getListaProtoDes(String nombre){
+        return cr.getListaProtoDes(nombre);
+    }
+        
+    public void asignarProto(String riesgo, java.util.List<String> protoAsoc){
+        cr.asignarProto(riesgo,protoAsoc);
     }
     
     public java.util.List<Riesgo> getListaRiesgos(String especie){
