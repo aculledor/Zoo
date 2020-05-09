@@ -416,7 +416,7 @@ public class DAOEspec extends AbstractDAO {
 
             String consulta = "select especie "
                     + "from especimenes "
-                    + "where deshabitat like ? ";
+                    + "where habitates like ? ";
         
             stmCatalogo = con.prepareStatement(consulta);
             stmCatalogo.setString(1, "%"+habitat+"%");
