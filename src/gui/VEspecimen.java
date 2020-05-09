@@ -127,6 +127,11 @@ public class VEspecimen extends javax.swing.JDialog {
         fieldNombreHabitat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fieldNombreHabitat.setText("Nombre Habitat");
         fieldNombreHabitat.setBorder(null);
+        fieldNombreHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldNombreHabitatActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Compañeros de Hábitat");
@@ -407,6 +412,10 @@ public class VEspecimen extends javax.swing.JDialog {
         fieldFechaInicio.setText("");
         fieldFechaFin.setText("");
     }//GEN-LAST:event_botonGuardarActionPerformed
+
+    private void fieldNombreHabitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreHabitatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldNombreHabitatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
